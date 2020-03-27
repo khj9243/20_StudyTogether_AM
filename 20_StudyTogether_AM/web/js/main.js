@@ -6,6 +6,7 @@ $(function(){
     //경고창 숨기기
     $("#alert-idSuccess").hide();
     $("#alert-idDanger").hide();
+    $("#alert-idDuplicated").hide();
     $("#alert-pwSuccess").hide();
     $("#alert-pwDanger").hide();
     $("#alert-pwSameSuccess").hide();
@@ -19,22 +20,48 @@ $(function(){
     $("#id").blur(function(){
         // userIdCheck : 영문 대.소문자, 숫자 _,-만 입력 가능하고 5에서 20자리를 입력했는지 체크한다 
         // {}사이에는 n과 m을 입력하여 n과 m사이의 값을 입력했는지 체크한다. n만 입력했을 경우 n자리 수 만큼 입력했는지 체크한다.
+    	//ajax통신으로 id중복체크
+    	const ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    	console.log(ctx+'/member/idDuplicateCheck');
+    	//console.log($(this).val().trim());
+    	var str="";
+    	$.ajax({
+    		url:ctx+'/member/idDuplicateCheck',
+			dataType:"json",
+			type:"post",
+			data:{"id":$(this).val().trim()},
+			async: false, //결과값 받아서 if분기문에 사용해야하므로 동기로 전환
+			success:function(data) {
+				console.log(data.result);
+				str=data.result;
+			}
+		});
+    	
         var userIdCheck = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
-        if(!$(this).val().trim()==""){            
-            if(!userIdCheck.test($(this).val().trim())){
+        if(!$(this).val().trim()==""){        	
+        	console.log(str);
+        	//db에 아이디가 있지 않고, 유효성검증 통과
+        	if(str=="NO"){
+                 $("#alert-idSuccess").hide();
+                 $("#alert-idDanger").hide();
+                 $("#alert-idDuplicated").show();
+                 $("#submit").attr("disabled", "disabled");
+            }else if(!userIdCheck.test($(this).val().trim())){  
                 $("#alert-idSuccess").hide();
                 $("#alert-idDanger").show();
+                $("#alert-idDuplicated").hide();
                 $("#submit").attr("disabled", "disabled");
-                joinFlag=false;
-            }else if(userIdCheck.test($(this).val().trim())){
-                $("#alert-idSuccess").show();
-                $("#alert-idDanger").hide();
-                $("#submit").removeAttr("disabled");
-                joinFlag=true;
+            }else {
+            	$("#alert-idSuccess").show();
+            	$("#alert-idDanger").hide();
+            	$("#alert-idDuplicated").hide();
+            	$("#submit").removeAttr("disabled");
+            	joinFlag=true;
             } 
         }else{
             $("#alert-idSuccess").hide();
             $("#alert-idDanger").hide();
+            $("#alert-idDuplicated").hide();
             $("#submit").attr("disabled", "disabled");
         }
     });
@@ -49,7 +76,8 @@ $(function(){
                 $("#alert-pwDanger").show();
                 $("#submit").attr("disabled", "disabled");
                 joinFlag=false;
-            }else if(passwdCheck.test($(this).val().trim())){
+            }
+            if(passwdCheck.test($(this).val().trim())){
                 $("#alert-pwSuccess").show();
                 $("#alert-pwDanger").hide();
                 $("#submit").removeAttr("disabled");
@@ -86,8 +114,9 @@ $(function(){
             joinFlag=false;
         }
     });
-    //이름 유효값 체크
-    $("#name").blur(function(){
+    
+  //이름 유효값 체크
+    $("#joinName").blur(function(){
         // nameCheck : 2~6글자의 한글만 입력하였는지 검사
         var nameCheck = RegExp(/^[가-힣]{2,6}$/);
         if(!$(this).val().trim()==""){            
@@ -110,7 +139,7 @@ $(function(){
         }
     });
     //이메일 유효값 체크
-    $("#email").blur(function(){
+    $("#joinEmail").blur(function(){
         // emailCheck : 이메일 형식에 맞게 썻는지 검사 ex)aa01@aa.aa
         var emailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
         if(!$(this).val().trim()==""){            
@@ -264,30 +293,17 @@ function hangul_chk(id){//{{{
 }//}}}
 
 
-/*javascript onload*/
-function addOnload(func) {
-    var initOnLoad = window.onload;
-    if(typeof initOnLoad == 'function') {
-    window.onload = function() {
-        initOnLoad();
-        func();
-    }
-    }
-    else {
-    window.onload = func;
-    }
-}
-function func_1st() {
-}
-function func_2nd() {
-}
-addOnload(func_1st);
-addOnload(func_2nd);
-
 /*checkbox select all*/
 function check_class_toggle(){
-    document.getElementById("classSelect").checked=!document.getElementById("classSelect").checked;
-    for(var i=0;i<document.frm1.length;i++){
-        document.frm1.elements[i].checked=!document.frm1.elements[i].checked; 
-    }
+	if(document.getElementById("classSelect").checked==true){
+		document.frm1.classSelect.checked=false;
+		for(var i=0;i<document.frm1.length;i++){
+	        document.frm1.elements[i].checked=true;
+	    }
+	} else if(document.getElementById("classSelect").checked==false){
+		document.frm1.classSelect.checked=false;
+		for(var i=0;i<document.frm1.length;i++){
+	        document.frm1.elements[i].checked=false;
+	    }
+	}
 }

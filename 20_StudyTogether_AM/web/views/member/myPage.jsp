@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ include file="/views/common/header.jsp" %>
 
 
@@ -9,7 +8,7 @@
 
 <!-- header페이지 불러오기 -->
 <div class="container">
-	<div class="container-fluid mt-3 mb-3">
+	<div name="nav" class="container-fluid mt-3 mb-3">
         <div class="row">
             <nav>
                 <ul class="navbar-nav flex-row">
@@ -20,11 +19,11 @@
             </nav>
         </div>
     </div>
-    <div class="container-fluid mt-5 mb-3">
+    <div name="must" class="container-fluid mt-5 mb-3">
         <div class="row">
             <fieldset>
                 <legend>필수입력</legend>
-                <form action="<%=request.getContextPath() %>/member/memberUpdate" method="POST" name="updateForm" class="form-group">
+                <form method="POST" name="updateForm" class="form-group">
                     <table class="table">
                         <tbody>
                             <tr>
@@ -32,8 +31,17 @@
                                     <label for="myPageId">아이디</label>
                                 </td>
                                 <td>
-                                    <input type="hidden" name="id" id="myPageId" value="<%=loginMember.getUserId()%>" disabled>
+                                    <input type="text" name="id" id="myPageId" value="<%=loginMember.getUserId()%>" style="display:none;">
                                     <span><%=loginMember.getUserId()%></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="myPagePwd">이름</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="username" id="myPageUsername" value="<%=loginMember.getUserName()%>" style="display:none;">
+                                    <span><%=loginMember.getUserName()%></span>
                                 </td>
                             </tr>
                             <tr>
@@ -41,7 +49,7 @@
                                     <label for="myPagePwd">비밀번호</label>
                                 </td>
                                 <td>
-                                    <input type="password" name="pwd" id="myPagePwd" value="<%=loginMember.getPassword()%>">　　　　　　　　　　　　
+                                    <input type="password" name="pwd" id="myPagePwd" value="">　　　　　　　　　　　　
                                 </td>
                             </tr>
                             <tr>
@@ -66,11 +74,11 @@
             </fieldset>
         </div>
     </div>
-    <div class="container-fluid">
+    <div name="option" class="container-fluid">
         <div class="row mt-2">
             <fieldset>
                 <legend>선택입력</legend>
-                <form method="POST" name="inputForm2" class="form-group">
+                <form method="POST" name="updateForm" class="form-group">
                     <table class="table">
                         <tbody>
                             <tr>
@@ -88,12 +96,12 @@
                                 <td>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="gender" id="gender" <%=loginMember.getGender().equals("M")?"checked":"unchecked"%>>남
+                                            <input type="radio" class="form-check-input" name="gender" id="gender" value="M" <%=loginMember.getGender()!=null&&loginMember.getGender().equals("M")?"checked":"unchecked"%>>남
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="gender" id="gender" <%=loginMember.getGender().equals("F")?"checked":"unchecked"%>>여
+                                            <input type="radio" class="form-check-input" name="gender" id="gender" value="F" <%=loginMember.getGender()!=null&&loginMember.getGender().equals("F")?"checked":"unchecked"%>>여
                                         </label>
                                     </div>
                                 </td>
@@ -122,8 +130,8 @@
                                     <!-- DAUM Post API -->
                                     <input type="text" id="sample3_postcode" name="" placeholder="우편번호">
                                     <input type="button" onclick="sample3_execDaumPostcode()" name="" value="우편번호 찾기"><br>
-                                    <input type="text" id="sample3_address" placeholder="주소" name="" value="<%=loginMember.getAddress()!=null?loginMember.getAddress():""%>"><br>
-                                    <input type="text" id="sample3_detailAddress" name="" placeholder="상세주소">
+                                    <input type="text" id="sample3_address" placeholder="주소" name="address1" value="<%=loginMember.getAddress()!=null?loginMember.getAddress():""%>"><br>
+                                    <input type="text" id="sample3_detailAddress" name="address2" placeholder="상세주소">
                                     <input type="text" id="sample3_extraAddress" name="" placeholder="참고항목">
 
                                     <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
@@ -211,21 +219,110 @@
                     </table>
                     <div class="row">
                     	<span class="col-10 text-right small">회원에서 탈퇴하시려면 여기로</span>
-                    	<input type="button" class="btn btn-light w-10 col-2 btn-sm" id="deactivate" value="회원탈퇴" onclick="">
+                    	<input type="button" class="btn btn-light w-10 col btn-sm" id="deactivate" value="회원탈퇴" onclick="">
                     </div>
                     <div class="row mt-4">
-                        <input type="button" class="btn btn-light w-50 col" id="join" value="회원수정" onclick="">
-                        <input type="reset" class="btn btn-light w-50 col" id="join" value="취소">
+                        <input type="button" class="btn btn-light col" id="join" value="회원수정">
                         <script>
-                            // function validate(){
-                            //     if(){
-                            //         return false;
-                            //     }
-                            //     return true;
-                            // }
+                        	$("#join").click(function(){
+                        		function updateOK(){
+	                        		var formMerge=$("form[name='updateForm']").serialize();
+	                        		console.log(formMerge);
+	                        		$.ajax({  
+	    							    url : "<%=request.getContextPath()%>/member/memberUpdate",  
+	    							    type : "POST",  
+	    							    data : formMerge,
+	    							    dataType: "html",
+	    							    success : function(data){  
+	    							    	$('#myPagePwd').val('');
+	    							    	$('#myPagePwdCheck').val('');
+	    							    	alert('회원 정보를 수정 했습니다');
+	    							    }, 
+	    							    error:function(data){ //ajax 오류인경우  
+	    							    	alert('회원 수정에 실패했습니다. 관리자에게 문의하세요');
+	        							}  
+	    							});  
+                        			
+                        		}
+                        		
+                        		if($('#myPagePwdCheck').val()==$('#myPagePwd').val() && $('#myPagePwd').val()=='<%=loginMember.getPassword()%>'){
+                        			updateOK();
+                        		}else if($('#myPagePwdCheck').val()==""){
+                        			alert('회원정보 수정을 위해 비밀번호를 입력하세요.');
+                        		}else{
+                        			alert('입력한 비밀번호가 서로 일치하지 않습니다.');
+                        		}
+                        	});
+                        	$("#deactivate").click(function(){
+								$("div[name='must']").hide();
+								$("div[name='option']").hide();
+ 						 		$("div[name='delForm']").removeClass("d-none");
+ 							});
                         </script>
                     </div>
                 </form>
+            </fieldset>
+        </div>
+    </div>
+    <div name="delForm" class="container-fluid d-none">
+        <div class="row">
+            <fieldset>
+                <legend>회원 탈퇴</legend>
+                <form method="POST" name="deleteForm" class="form-group">
+                    <table class="table">
+                        <tbody>
+                        	<h5>가입시 입력한 비밀번호를 한번 더 입력하세요</h5>
+                        	<input type="hidden" name="dId" value="<%=loginMember.getUserId()%>">
+                        	<input type="hidden" name="dPw" value="<%=loginMember.getPassword()%>">
+                            <tr>
+                                <td>
+                                    <label for="deletePwdCheck">비밀번호 확인</label>
+                                </td>
+                                <td>
+                                    <input type="password" name="deletePwdCheck" id="deletePwdCheck" value="">
+                                </td>
+                            </tr>
+                            <tr>
+		                        <td colspan="2">
+                            		<p>정말 탈퇴하시겠습니까?</p>
+      		                        <input type="button" class="btn btn-light col" id="deactiveMember" value="회원탈퇴">
+		                        </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <script>
+                	$("#deactiveMember").click(function(){
+                		if($("#deletePwdCheck").val()!=null && $("#deletePwdCheck").val()=="<%=loginMember.getPassword()%>"){
+                			
+                			let newForm = document.createElement('form');
+                			newForm.method = 'POST';
+                			newForm.action = '<%=request.getContextPath()%>/member/deleteMember';
+                			newForm.name = 'newForm';
+
+                			let data = document.createElement('input');
+                			data.setAttribute('type', 'hidden');
+                			data.setAttribute('name', 'id');
+                			data.setAttribute('value', '<%=loginMember.getUserId()%>');
+                			newForm.appendChild(data);
+                			
+                			data = document.createElement('input');
+                			data.setAttribute('type', 'hidden');
+                			data.setAttribute('name', 'pw');
+                			data.setAttribute('value', '<%=loginMember.getPassword()%>');
+                			newForm.appendChild(data);
+                			
+                			document.body.appendChild(newForm);
+                			newForm.submit();
+                			
+            	         
+                		} else if($("#deletePwdCheck").val()==""){
+							alert('비밀번호를 입력하지 않았습니다');
+                		} else {
+                			alert('비밀번호가 일치하지 않습니다.');
+                		}
+                	})
+                </script>
             </fieldset>
         </div>
     </div>
