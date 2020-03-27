@@ -67,7 +67,6 @@ button{
              
                 <input type="submit" value="등록">
                 <input type="reset" value="취소">
-             
        </form>  
-
+push되니??????????????
 <%@ include file="/views/common/footer.jsp"%>
