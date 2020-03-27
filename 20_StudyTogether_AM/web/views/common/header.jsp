@@ -45,14 +45,16 @@
 <body>
 <div class=main>
 <% if(loginMember==null){ %>
-    <a id=mainlogo href="메인.html"><img src="<%=request.getContextPath() %>/images/logo.png" width="180px" height="100px"></a>
+    <a id=mainlogo href="<%=request.getContextPath() %>">
+		<img src="<%=request.getContextPath() %>/images/logo.png" width="180px" height="100px">
+	</a>
     <button class="main2" type="button" onclick="location.href='<%=request.getContextPath() %>/faq/faqList'">고객센터</button>
 	<button class="main2" type="button" data-target="#loginModalCenter" data-toggle="modal">회원가입</button>
     <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="main2">로그인</button>
    <%}else{ %>
-   <a id=mainlogo href="메인.html">
-     <img src="<%=request.getContextPath() %>/images/logo.png" width="180px" height="100px">
-  </a>
+   <a id=mainlogo href="<%=request.getContextPath() %>">
+		<img src="<%=request.getContextPath() %>/images/logo.png" width="180px" height="100px">
+	</a>
       <button class="main2" type="button" onclick="location.href='<%=request.getContextPath() %>/faq/faqList'">고객센터</button>
       <%if(loginMember!=null && loginMember.getUserId().equals("admin")){ %>
          <button onclick="location.href='<%=request.getContextPath()%>/admin/adminPage'" class="main2">관리페이지</button>                                                                              
@@ -108,6 +110,8 @@
 		</form>
 	</div>
 </div> 
+
+
 <!-- Join Modal -->
 <div class="modal fade" id="loginModalCenter" tabindex="-1" role="dialog" aria-labelledby="loginModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -141,6 +145,13 @@
                                             <path fill-rule="evenodd" d="M14.354 5.646a.5.5 0 010 .708l-8 8a.5.5 0 01-.708-.708l8-8a.5.5 0 01.708 0z" clip-rule="evenodd"></path>
                                         </svg>
                                         영문 대.소문자, 숫자 _,-만 입력 가능합니다
+                                    </div>
+                                    <div class="alert alert-danger" id="alert-idDuplicated">
+                                        <svg class="bi bi-x" width="1.2em" height="1.2em" viewBox="0 0 20 20" fill="red" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M5.646 5.646a.5.5 0 000 .708l8 8a.5.5 0 00.708-.708l-8-8a.5.5 0 00-.708 0z" clip-rule="evenodd"></path>
+                                            <path fill-rule="evenodd" d="M14.354 5.646a.5.5 0 010 .708l-8 8a.5.5 0 01-.708-.708l8-8a.5.5 0 01.708 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        중복된 아이디입니다.
                                     </div>
                                 </tr>
                                 <tr>
@@ -185,7 +196,7 @@
                                 </tr>
                                 <tr>    
                                     <div class="form-group">
-                                        <input type="text" id="name" class="form-control" name="userName" placeholder="Username" required>
+                                        <input type="text" id="joinName" class="form-control" name="userName" placeholder="Username" required>
                                     </div>                
                                 </tr>
                                 <tr>
@@ -205,7 +216,7 @@
                                 </tr>
                                 <tr>
                                     <div class="form-group">
-                                        <input type="email" id="email" class="form-control" name="email" placeholder="Email" required>
+                                        <input type="email" id="joinEmail" class="form-control" name="email" placeholder="Email" required>
                                     </div>        
                                 </tr>
                                 <tr>
