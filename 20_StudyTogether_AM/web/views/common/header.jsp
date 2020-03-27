@@ -53,7 +53,7 @@
    <a id=mainlogo href="메인.html">
      <img src="<%=request.getContextPath() %>/images/logo.png" width="180px" height="100px">
   </a>
-      <button class="main2">고객센터</button>
+      <button class="main2" type="button" onclick="location.href='<%=request.getContextPath() %>/faq/faqList'">고객센터</button>
       <%if(loginMember!=null && loginMember.getUserId().equals("admin")){ %>
          <button onclick="location.href='<%=request.getContextPath()%>/admin/adminPage'" class="main2">관리페이지</button>                                                                              
       <%} %>
