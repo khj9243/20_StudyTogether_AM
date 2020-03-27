@@ -7,7 +7,7 @@
 참여한 강좌 리스트에는 로그인 되어있는 강좌만 표시 되도롣!!!! -->
 
 <form>
-<div>스터디후기작성22</div>
+<div>스터디후기작성222</div>
 	<table class="revWrite" style="padding-top:0px" align = "center" width="800" border="0" cellpadding="2" >
       <tr>
         <td>작성자</td>
