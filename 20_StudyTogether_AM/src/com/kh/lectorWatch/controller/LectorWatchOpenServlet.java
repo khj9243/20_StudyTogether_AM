@@ -15,7 +15,7 @@ import com.kh.lector.model.vo.Lector;
 /**
  * Servlet implementation class LectorInsertServlet
  */
-@WebServlet("/lectorWatch/lectorOpen")
+@WebServlet("/lectorWatch/lectorwatchOpen")
 public class LectorWatchOpenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,7 +36,6 @@ public class LectorWatchOpenServlet extends HttpServlet {
 		
 		request.setAttribute("lector", l);
 		System.out.println(l);
-		
 		//화면 전환용 서블릿
 		request.getRequestDispatcher("/views/lector/lectorWatchOpen.jsp").forward(request, response);
 	
