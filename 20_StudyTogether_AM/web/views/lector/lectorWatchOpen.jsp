@@ -40,12 +40,12 @@ button{
 		
 		
        <h2>강좌 추가하기 </h2><br>
-    <form action="<%=request.getContextPath()%>/lectorWatch/lectorOpenEnd" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
    <input type="hidden" name="lectorRef" value="<%=l.getLectorNo()%>"/> 
-     강사명 <input type="text" name="refWriter" value="<%=l.getLectorWriter() %>" readonly><br>
+     강사명 <input type="text" name="refWriter" value="<%=l.getLectorWriter()%>" readonly><br>
     강의 제목<input type="text" name="refTitle" required><br><br>
        
-        강좌 분야
+      <!--   강좌 분야
       <select id="searchType" type="hidden"> 
      	<option value="카테고리">카테고리</option>
      	 <optgroup label="어학,회화">
@@ -70,7 +70,7 @@ button{
       </optgroup>
       </select>
             <br>
-      
+       -->
             <br>
            <!--  <br>한줄 소개<br>
             <textarea name="intro1" cols="100" rows="3" style="resize: none;"  placeholder="*이 강좌의 특성을 간단하게 소개해주세요."></textarea>
@@ -85,7 +85,7 @@ button{
             <input type="file" name="refLectorVideo"/><br><br> 
             <!-- 영상 첨부 추가 될 수 있도록!!!! 변경 -->
        
-            <input type="hidden" name="price" placeholder="숫자만 입력" value="" readonly>원<br><br>
+            가격<input type="number" name="price" placeholder="숫자만 입력" value="<%=l.getLectorPrice() %>" readonly>원<br><br>
              
                 <input type="submit" value="등록">
                 <input type="reset" value="취소">
