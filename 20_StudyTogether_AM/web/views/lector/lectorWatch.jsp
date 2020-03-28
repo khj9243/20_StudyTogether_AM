@@ -16,7 +16,7 @@ Lector l=(Lector)request.getAttribute("lector");
 <section>
  <div class="container">
     <%-- <a href="<%=request.getContextPath() %>/lectorWatch/lectorInsert" class="btn btn-info" role="button">강좌 추가</a> --%>
-    <a href="<%=request.getContextPath()%>/lectorWatch/lectorOpen?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 추가</a>
+    <a href="<%=request.getContextPath()%>/lectorWatch/lectorwatchOpen?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 추가</a>
     <a href="<%=request.getContextPath()%>/lector/lectorUpdate?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 수정</a>
     <a href="<%=request.getContextPath() %>/lector/lectorDelete?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 삭제</a><!--관리자만 삭제  -->
   </div>
@@ -51,6 +51,7 @@ Lector l=(Lector)request.getAttribute("lector");
 <div class="container">
   <div class="list-group">
     <a href="<%=request.getContextPath()%>/lector/lectorWatch?no=<%=l.getLectorTitle()%>" class="list-group-item list-group-item-action"><%=l.getLectorTitle() %></a>
+  	<a href="<%=request.getContextPath()%>/lector/lectorWatch?no=<%=l.getLectorTitle()%>" class="list-group-item list-group-item-action"><%=l.getLectorTitle() %></a>
   	
   	
   </div>
