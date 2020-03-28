@@ -30,11 +30,20 @@ private MemberDao dao = new MemberDao();
 		return result;
 	}
 	
-	public Member lookforPassword(String id, String userName, String email) {
+	public Member lookforPassword(String id, String name, String email) {
 		Connection conn = getConnection();
-		Member m = dao.lookforPassword(conn, id, userName, email);
+		Member m = dao.lookforPassword(conn, id, name, email);
 		close(conn);
 		return m;
+	}
+	
+	public int updatePassword(String id, String pw) {
+		Connection conn = getConnection();
+		int result = dao.updatePassword(conn, id, pw);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 	public List<Member> selectMember() {

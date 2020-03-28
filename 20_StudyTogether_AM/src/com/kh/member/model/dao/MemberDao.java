@@ -88,7 +88,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	public Member lookforPassword(Connection conn, String id, String userName, String email) {
+	public Member lookforPassword(Connection conn, String id, String name, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("selectCheckinfo");
@@ -96,7 +96,7 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, userName);
+			pstmt.setString(2, name);
 			pstmt.setString(3, email);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -120,6 +120,23 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return m;
+	}
+	
+	public int updatePassword(Connection conn, String id, String pw) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updatePassword");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	public List<Member> selectMember(Connection conn) {
