@@ -10,15 +10,21 @@
 	</div>
 	<div class="row mb-5">
 	    <div class="col text-center">
-	      <a href="<%=request.getContextPath()%>/admin/adminGrantLector" class="text-decoration-none text-reset">강좌신청 관리</a>
+	      <a href="<%=request.getContextPath()%>/admin/adminGrantLector" class="text-decoration-none text-reset text-decoration-none text-dark">강좌신청 관리</a>
 	    </div>
 	    <div class="col text-center">
-	      <a href="<%=request.getContextPath()%>/admin/adminManageLector" class="text-decoration-none text-reset">개설된 강좌 목록</a>
+	      <a href="<%=request.getContextPath()%>/admin/adminManageLector" class="text-decoration-none text-reset text-decoration-none text-dark">개설된 강좌 목록</a>
 	    </div>
 	    <div class="col text-center">
-	      <a href="<%=request.getContextPath()%>/admin/adminGrantStudy" class="text-decoration-none text-reset">스터디신청 관리</a>
+	      <a href="<%=request.getContextPath()%>/admin/adminGrantStudy" class="text-decoration-none text-reset text-decoration-none text-dark">스터디신청 관리</a>
 	    </div>
 	    <div class="col text-center">
-	      <a href="<%=request.getContextPath()%>/admin/adminManageStudy" class="text-decoration-none text-reset">개설된 스터디 목록</a>
+	      <a href="<%=request.getContextPath()%>/admin/adminManageStudy" class="text-decoration-none text-reset text-decoration-none text-dark">개설된 스터디 목록</a>
+	    </div>
+	    <div class="col text-center">
+	      <a href="<%=request.getContextPath()%>/admin/adminMemberList" class="text-decoration-none text-reset text-decoration-none text-dark">가입 회원 조회</a>
+	    </div>
+	    <div class="col text-center">
+	      <a href="<%=request.getContextPath()%>/admin/adminManageRefund" class="text-decoration-none text-reset text-decoration-none text-dark">취소/환불 현황</a>
 	    </div>
 	</div>
