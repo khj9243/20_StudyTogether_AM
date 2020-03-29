@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.List,com.kh.lector.model.vo.Lector" %>
+<%@page import="java.util.List,com.kh.study.model.vo.Study" %>
 	
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/studyList.css" type="text/css"/>
 
+<%
+	List<Study> list=(List)request.getAttribute("list");
+ 	int cPage=(int)request.getAttribute("cPage");
+%>
 
 <section>
   <div class="make">
-    <a href=""><img src="<%=request.getContextPath() %>/images/owl.JPG" width="100px" height="auto" ><br><p>스터디개설하기</p></a>
+    <a href="<%=request.getContextPath()%>/study/studyOpen"><img src="<%=request.getContextPath() %>/images/owl.JPG" width="100px" height="auto" ><br><p>스터디개설하기</p></a>
   </div>
   
   <div id=studytitle>스터디 찾기 </div>
@@ -98,18 +102,28 @@
       <button type="submit">검색</button>
 </div>
 </div>
-
+ <%if(list.isEmpty()){ %>
 <div class="list_start">
-  <a href="강좌 시청.html">
+<h3>검색된 강좌가 없습니다.</h3>
+<%}else{ %>
+	<%for(Study s:list){ %>
+  <a href="<%=request.getContextPath()%>/study/studyWatch?no=<%=s.getStudyNo()%>">
     <div class="list_detail">
-      <h4>카테고리</h4>
+      <h4><%=s.getStudyCategory() %></h4>
+      <%if(s.getOriImg()!=null){ %>
       <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
+        <img src="<%=request.getContextPath() %>/upload/study/<%=s.getOriImg() %>" class="" width="200px" height="150px">
       </div>
-      <div id="lectorTitle">강성태의 영문법</div>
+      <%} %>
+      <div id="lectorTitle"><%=s.getStudyName() %><br/></div>
     </div>
   </a>
+  <%}
+ }%>
 </div>
+ 	<ul class="pagination">
+		<%=request.getAttribute("pageBar") %>
+	</ul> 
 
 <div class="list_start">
   <a href="강좌 시청.html">

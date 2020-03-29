@@ -42,7 +42,6 @@
    
    <title>Study Together</title>
 </head>
-
 <body>
 <div class=main>
 <% if(loginMember==null){ %>
@@ -258,7 +257,7 @@
       <a href="<%=request.getContextPath()%>/lector/lectorList">강좌 스터디</a>
     </li>
     <li class='menu2'>
-      <a href="일반 스터디 목록.html">일반 스터디</a>
+      <a href="<%=request.getContextPath()%>/study/studyList">일반 스터디</a>
     </li>
     <li class='menu3'>
       <a href="<%=request.getContextPath()%>/review/reviewStudy/reviewStudyList">스터디 후기</a>

@@ -17,6 +17,7 @@
   <div class="make">
     <a href="<%=request.getContextPath()%>/lector/lectorOpen"><img src="<%=request.getContextPath() %>/images/owl.JPG" width="100px" height="auto" ><br><p>강좌 개설하기</p></a>
   </div>
+  
   	<div id=title>강좌 스터디 찾기 </div>
 	<div class="main_list">
 	 <!-- 상단 제목 -->
@@ -106,49 +107,5 @@
             }); 
         });
     });
-    
-    
-
- /*  //온로드
-   	$(function(){
-  		$("#searchType").change(()=>{
-  			//select가 변경됐을때 change함수 이용
-  			let type=$("#searchType").val();
-  			//userName,userId,gender 값받기
-  			let english=$("#search-english");
-  			let spanish=$("#search-spanish");
-  			let japanese=$("#search-japanese");
-  			let french=$("#search-french");
-  			let Letc=$("#search-Letc");
-  			let bread=$("#search-bread");
-  			let inform=$("#search-inform");
-  			let computer=$("#search-computer");
-  			let toeic=$("#search-toeic");
-  			let Jetc=$("#search-Jetc");
-  			let algorithm=$("#search-algorithm");
-  			let database=$("#search-database");
-  			let java=$("#search-java");
-  			let Ietc=$("#search-Ietc");
-  			all.hide();
-  			english.hide();//다 닫힌다
-  			spanish.hide();//다 닫힌다
-  			japanese.hide(); //다 닫힌다
-  			french.hide();//다 닫힌다
-  			Letc.hide();//다 닫힌다
-  			bread.hide(); //다 닫힌다
-  			inform.hide();//다 닫힌다
-  			computer.hide();//다 닫힌다
-  			toeic.hide(); //다 닫힌다
-  			Jetc.hide();//다 닫힌다
-  			algorithm.hide();//다 닫힌다
-  			database.hide(); //다 닫힌다
-  			java.hide();//다 닫힌다
-  			Ietc.hide();//다 닫힌다
-  			
-  			$("#search-"+type).css("display","inline-block");
-  		})
-  		$("#searchType").trigger("change");//trigger(강제실행)(change)먼저 실행하고 위에 함수 실행
-  	}) 
- */
     </script>
 <%@ include file="/views/common/footer.jsp"%>

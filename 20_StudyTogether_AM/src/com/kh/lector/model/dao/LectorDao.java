@@ -43,7 +43,6 @@ public class LectorDao {
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);
 			pstmt.setInt(2, cPage*numPerPage);
 			rs=pstmt.executeQuery();
-			
 			while(rs.next()) {
 				Lector l=new Lector();
 				l.setLectorNo(rs.getInt("lector_no"));

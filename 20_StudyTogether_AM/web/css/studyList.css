@@ -8,14 +8,15 @@
     font-weight:bolder;
     font-size:25px;
 }
-
-
 .list_start {
     text-align: center;
     margin-top:80px;
-    display: 
-     float:left;
+    display: flex;
+
+  
+    
 }
+
 
 /* 이미지리스트간 속성 */
 .list_detail{
@@ -29,6 +30,7 @@
     opacity: 0;
    	float:left;
 }  
+
 .list_detail:hover{
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
@@ -79,3 +81,4 @@ select{
  .pagination{
  margin-left:600px;
  }
+
