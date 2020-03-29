@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.lector.model.vo.Lector;
+import com.kh.lectorWatch.model.vo.LectorWatch;
 
 public class LectorDao {
 
@@ -240,6 +241,95 @@ public class LectorDao {
 		return result;
 	}
 
-	
+
+
+
+	public int insertLector(Connection conn, LectorWatch lw) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertLectorWatch");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,lw.getRefLectorNo());
+			pstmt.setString(2,lw.getWatchTitle());
+			pstmt.setString(3, lw.getWatchWriter());
+			pstmt.setString(4,lw.getWatchDetail());
+			pstmt.setInt(5, lw.getWatchPrice());
+			pstmt.setString(6, lw.getWatchOriginalVideo());
+			pstmt.setString(7, lw.getWatchRenamedVideo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+//lectorWatch조회
+	public List<LectorWatch> selectLectorWatch(Connection conn, int no) {
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<LectorWatch> list=new ArrayList();
+		String sql=prop.getProperty("selectLectorWatch");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				LectorWatch lw=new LectorWatch();
+				lw.setWatchNo(rs.getInt("lector_watch_no"));
+				lw.setRefLectorNo(rs.getInt("lector_watch_no_ref"));
+				lw.setWatchTitle(rs.getString("lector_watch_title"));
+				lw.setWatchWriter(rs.getString("lector_watch_writer"));
+				lw.setWatchDetail(rs.getString("lector_watch_detail"));
+				lw.setWatchPrice(rs.getInt("lector_watch_price"));
+				lw.setWatchOriginalVideo(rs.getString("original_lector_watch_video"));
+				lw.setWatchRenamedVideo(rs.getString("renamed_lector_watch_video"));
+				lw.setWatchDate(rs.getDate("lector_watch_date"));
+				list.add(lw);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public LectorWatch selectLectorWatchView(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectLectorWatchView");
+		LectorWatch lw=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+		
+			if(rs.next())
+			lw=new LectorWatch();
+			lw.setWatchNo(rs.getInt("lector_watch_no"));
+			lw.setRefLectorNo(rs.getInt("lector_watch_no_ref"));
+			lw.setWatchTitle(rs.getString("lector_watch_title"));
+			lw.setWatchWriter(rs.getString("lector_watch_writer"));
+			lw.setWatchDetail(rs.getString("lector_watch_detail"));
+			lw.setWatchPrice(rs.getInt("lector_watch_price"));
+			lw.setWatchOriginalVideo(rs.getString("original_lector_watch_video"));
+			lw.setWatchRenamedVideo(rs.getString("renamed_lector_watch_video"));
+			lw.setWatchDate(rs.getDate("lector_watch_date"));
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return lw;
+	}
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.kh.lector.model.dao.LectorDao;
 import com.kh.lector.model.vo.Lector;
+import com.kh.lectorWatch.model.vo.LectorWatch;
 
 public class LectorService {
 
@@ -68,6 +69,30 @@ public class LectorService {
 		close(conn);
 		return result;
 	}
+
+	public int insertLectorWatch(LectorWatch lw) {
+		Connection conn=getConnection();
+		int result=dao.insertLector(conn,lw);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public List<LectorWatch> selectLectorWatch(int no) {
+		Connection conn=getConnection();
+		List<LectorWatch> list=dao.selectLectorWatch(conn,no);
+		close(conn);
+		return list;
+	}
+
+	public LectorWatch selectLectorWatchView(int no) {
+		Connection conn=getConnection();
+		LectorWatch lw=dao.selectLectorWatchView(conn,no);
+		close(conn);
+		return lw;
+	}
+	
 
 
 	//카테고리 검색하는 메서드

@@ -40,8 +40,8 @@ button{
 		
 		
        <h2>강좌 추가하기 </h2><br>
-    <form action="" method="post" enctype="multipart/form-data">
-   <input type="hidden" name="lectorRef" value="<%=l.getLectorNo()%>"/> 
+    <form action="<%=request.getContextPath() %>/lectorWatch/lectorWatchOpenEnd" method="post" enctype="multipart/form-data">
+   <input type="text" name="lectorRef" value="<%=l.getLectorNo()%>" readonly/> 
      강사명 <input type="text" name="refWriter" value="<%=l.getLectorWriter()%>" readonly><br>
     강의 제목<input type="text" name="refTitle" required><br><br>
        

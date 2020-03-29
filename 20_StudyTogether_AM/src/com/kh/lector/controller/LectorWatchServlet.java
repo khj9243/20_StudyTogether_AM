@@ -1,6 +1,7 @@
 package com.kh.lector.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.lector.model.service.LectorService;
 import com.kh.lector.model.vo.Lector;
+import com.kh.lectorWatch.model.vo.LectorWatch;
 
 /**
  * Servlet implementation class LectorWatch
  */
 @WebServlet("/lector/lectorWatch")
-public class LectorWatch extends HttpServlet {
+public class LectorWatchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LectorWatch() {
+    public LectorWatchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +36,9 @@ public class LectorWatch extends HttpServlet {
 		int no=Integer.parseInt(request.getParameter("no"));
 
 		Lector l=new LectorService().selectLector(no);
+		//lectorWatch조회
+		List<LectorWatch> lwList=new LectorService().selectLectorWatch(no);
+		
 		
 		String msg="";
 		String loc="";
@@ -45,6 +50,7 @@ public class LectorWatch extends HttpServlet {
 			
 		}else {
 			request.setAttribute("lector", l);
+			request.setAttribute("lwList", lwList);
 			request.getRequestDispatcher("/views/lector/lectorWatch.jsp").forward(request, response);
 		}
 	}

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="java.util.List,com.kh.lector.model.vo.Lector" %>
+<%@page import="java.util.List,com.kh.lector.model.vo.Lector,com.kh.lectorWatch.model.vo.LectorWatch" %>
 
 
 <%
 Lector l=(Lector)request.getAttribute("lector");
+List<LectorWatch> list=(List)request.getAttribute("lwList");
 %>
 
 
@@ -48,22 +49,28 @@ Lector l=(Lector)request.getAttribute("lector");
  
 
 <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
+
+<!--강좌 추가한것  -->
 <div class="container">
   <div class="list-group">
-    <a href="<%=request.getContextPath()%>/lector/lectorWatch?no=<%=l.getLectorTitle()%>" class="list-group-item list-group-item-action"><%=l.getLectorTitle() %></a>
-  	<a href="<%=request.getContextPath()%>/lector/lectorWatch?no=<%=l.getLectorTitle()%>" class="list-group-item list-group-item-action"><%=l.getLectorTitle() %></a>
-  	
-  	
+    <a href="<%=request.getContextPath()%>/lector/lectorWatch?no=<%=l.getLectorNo()%>" class="list-group-item list-group-item-action"><%=l.getLectorTitle() %></a>
+  	<%if(list!=null&&!list.isEmpty()){
+	for(LectorWatch lw: list){%>
+  	<a href="<%=request.getContextPath()%>/lector/lectorWatchview?no=<%=lw.getWatchNo() %>" class="list-group-item list-group-item-action"><%=lw.getWatchTitle()%></a>
+	 <%}
+	}%>
   </div>
+ 
 </div>
-<div class="page">
 
+<div class="page">
 <ul class="pagination">
   <li class="page-item"><a class="page-link" href="#">이전</a></li>
   <li class="page-item"><a class="page-link" href="#">1</a></li>
   <li class="page-item"><a class="page-link" href="#">다음</a></li>
 </ul>
 </div>
+
 </section>
 <script>
 

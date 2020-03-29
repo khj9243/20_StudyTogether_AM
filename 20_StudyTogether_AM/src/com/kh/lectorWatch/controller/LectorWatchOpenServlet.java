@@ -32,6 +32,7 @@ public class LectorWatchOpenServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no=Integer.parseInt(request.getParameter("no"));
+		System.out.println(no);
 		Lector l=new LectorService().selectLector(no);
 		
 		request.setAttribute("lector", l);
