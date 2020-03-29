@@ -39,51 +39,43 @@
     }
   
 /* 후기 작성 화면 CSS */
+#revWTitle{
+	text-align:center;
+	height:50px;
+}
 table.revWrite{
         border-collapse: separate;
         border-spacing: 1px;
         text-align: left;
         line-height: 3;
         border-top: 1px solid #ccc;
-        margin : 20px 10px;
+        margin : 0 auto;
+        width:700px;
+        cellpadding:"2";
 }
 table.revWrite tr {
-         width: 50px;
-         padding: 10px;
+        width: 100px;
+        padding: 10px;
         font-weight: bold;
         vertical-align: top;
         border-bottom: 1px solid #ccc;
 }
-table.revWrite tr td {
+table.revWrite td {
          font-size: 15px;
          width: 100px;
          padding: 10px;
          vertical-align: top;
          border-bottom: 1px solid #ccc;
-         font-weight:bolder;
-         float:left;
-         
 }
-.revWrite tr td:first-of-type{
-	
-}
-
-/* table.revWrite tr td:second-of-type{
-		width:50px;
-	 	font-size: 15px;
-         padding: 10px;
-         vertical-align: top;
-         border-bottom: 1px solid #ccc;
-         font-weight:bolder;
-} */
-
-
 table.revWrite select {
         width: 300px;
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
         resize: vertical;
+}
+div#revWBtn{
+	margin-left:550px;
 }
 #revWCancelBtn, #revWenrollBtn{
     /* background-color: #4CAF50; */
@@ -93,8 +85,9 @@ table.revWrite select {
     border-radius: 4px;
     cursor: pointer;
     display: inline-block; 
-    margin: 0px auto; 
+    margin-: 0px auto; 
     width: 20%;
+    align: center;
   }
   #star_grade a{
     text-decoration: none;

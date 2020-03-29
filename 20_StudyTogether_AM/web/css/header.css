@@ -171,7 +171,7 @@ top: 0px;
       }
       
       /* 입력 창 스타일 */
-      input[type=text], input[type=password]{
+      input[type=text]#uname, input[type=password]#psw{
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
@@ -185,7 +185,7 @@ top: 0px;
         height: 100px;
       }
       /*버튼 스타일 */
-      .form-button{
+      .login-button{
         /* background-color: red; */
         color: black;
         padding: 14px 20px;
@@ -225,7 +225,7 @@ top: 0px;
       }
       
       /* (x) 닫기 버튼 */
-      .close {
+      .loginClose {
         position: absolute;
         right: 25px;
         top: 0;
@@ -234,8 +234,8 @@ top: 0px;
         font-weight: bold;
       }
       
-      .close:hover,
-      .close:focus {
+      .loginClose:hover,
+      .loginClose:focus {
         color: red;
         cursor: pointer;
       }

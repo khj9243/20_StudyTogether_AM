@@ -17,9 +17,7 @@
     <br><br>
      
     <div id="selectReview" style="font-size:15px">
-        <a href="<%=request.getContextPath()%>/views/review/reviewStudyList.jsp">스터디 후기</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="<%=request.getContextPath()%>/views/review/reviewLectureList.jsp">강좌 후기</a>
+        <a href="<%=request.getContextPath()%>/review/reviewLecture/reviewLectureList">강좌 후기</a>
     </div>
     <br>
     <%for(ReviewStudy revS : list) {%>
@@ -45,7 +43,7 @@
            
 	<%} %>
 
-       		<ul class="pagination" style="margin-left:600px">
+       		<ul class="pagination" style="margin-left:670px">
 			<%=request.getAttribute("pageBar") %>
 			</ul>
         <%if(loginMember!=null){%>

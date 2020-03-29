@@ -70,7 +70,7 @@
 <div id="id01" class="modal">
   <form class="modal-content animate" style="width:30%" action="<%=request.getContextPath()%>/login" method="post">
     <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <span onclick="document.getElementById('id01').style.display='none'" class="loginClose" title="Close Modal">&times;</span>
       <img id="loginLogo" src="<%=request.getContextPath() %>/images/logo.png">
       <!-- <h1>로고</h1> -->
     </div>
@@ -82,7 +82,7 @@
       <!-- <label for="psw"><b>비밀번호</b></label> -->
       <input type="password" placeholder="Password" id="psw" name="psw" required>
         
-      <button onclick="loginCheck();" class="form-button" type="submit">Login</button>
+      <button onclick="loginCheck();" class="login-button" type="submit">Login</button>
 
       <label>
         <input type="checkbox" id="store">아이디 저장

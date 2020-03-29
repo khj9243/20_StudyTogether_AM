@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reviewBoard.css" type="text/css"/>
 
   <!-- 참여한 강좌가 없으면 row가 0이면..등록이 안되도록
 참여한 강좌 리스트에는 로그인 되어있는 강좌만 표시 되도롣!!!! -->
 
-<form>
-<div>스터디후기작성222</div>
-	<table class="revWrite" style="padding-top:0px" align = "center" width="800" border="0" cellpadding="2" >
+<form style="margin:0 auto;">
+<h2 id="revWTitle">스터디후기작성</h2>
+   <table class="revWrite">
       <tr>
         <td>작성자</td>
         <td><%=loginMember.getUserId() %><input type="hidden" name="writer" value="<%=loginMember.getUserId()%>" readonly required/></td>
@@ -85,13 +85,17 @@
              </p></td>
         </tr>
         <tr>
-        	<td>내용</td>
-        	<td><textarea name="content" cols=85 rows=5 style="resize:none;"></textarea></td>
+           <td>내용</td>
+           <td><textarea name="content" cols=85 rows=10 style="resize:none;"></textarea></td>
         </tr>
-	</table>
-	<div align="right">
-	            <button type="reset" onclick ="cancelChk()" id="revWCancelBtn" >취소</button>
-	            <button onclick="revWriteChk()" type="submit" id="revWenrollBtn">등록</button>
+          
+   </table>
+   <br>
+ 		<div id="revWBtn">
+          <button type="reset" onclick ="cancelChk()" id="revWCancelBtn" >취소</button>
+          <button onclick="revWriteChk()" type="submit" id="revWenrollBtn">등록</button>
+       	</div>
+
 </form>
       <script>
           var starCnt=0;
@@ -104,14 +108,14 @@
           });
   
           function cancelChk(){
-        	  if (confirm("정말 취소하시겠습니까??") == true){    //확인
-        		 	 location.replace("<%=request.getContextPath()%>/review/reviewStudy/reviewStudyList");
-        		 }else{   //취소
-        			 return false;
-        		 }
+             if (confirm("정말 취소하시겠습니까??") == true){    //확인
+                   location.replace("<%=request.getContextPath()%>/review/reviewStudy/reviewStudyList");
+               }else{   //취소
+                  return false;
+               }
            }
           function revWriteChk(){
-        	  
+             
           }
       </script>
 <%@ include file="/views/common/footer.jsp"%>
