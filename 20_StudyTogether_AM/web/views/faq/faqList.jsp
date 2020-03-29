@@ -15,7 +15,7 @@
 </script>
 
 <section id="faq-container">
-	<h2>FAQ 자주 묻는 질문</h2>
+	<h2>FAQ</h2>
 <%-- 		<% if(loginMember!=null&&loginMember.getUserId().equals("admin")){ %> --%>
 <!-- 			<!-- null && 로 안하면 nullpoint exception 뜨겠지 --> 
  			<button type="button" id="btn-faq-write" onclick="fn_faqWrite();">FAQ 작성</button>
