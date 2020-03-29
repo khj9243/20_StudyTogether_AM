@@ -29,6 +29,7 @@
    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css" type="text/css"/>
    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css" type="text/css"/>
    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/section.css" type="text/css"/>
+   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/lookPassword.css" type="text/css"/>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
    <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
