@@ -19,7 +19,7 @@ public class ReviewStudyDao {
 	
 	public ReviewStudyDao() {
 		try {
-			String path=ReviewStudyDao.class.getResource("/sql/reviewStudy/reviewStudy-query.properties").getPath();
+			String path=ReviewStudyDao.class.getResource("/sql/review/reviewStudy-query.properties").getPath();
 			prop.load(new FileReader(path));
 		}catch(IOException e) {
 			e.printStackTrace();
