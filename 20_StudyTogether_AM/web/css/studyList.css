@@ -11,9 +11,7 @@
 .list_start {
     text-align: center;
     margin-top:80px;
-    display: flex;
-
-  
+    display: inline-block;
     
 }
 
