@@ -31,15 +31,13 @@ public class MemberDao {
 		ResultSet rs = null;
 		String sql= prop.getProperty("selectId");
 		Member m = null;
-		try {
-			System.out.println("들어옴"+id+pw);
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pw);
-			
-			rs = pstmt.executeQuery();
-			
+		try {			
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, pw);
+				
+				rs = pstmt.executeQuery();
+				
 			if(rs.next()) {
 				m=new Member();
 				m.setUserId(rs.getString("user_id"));
@@ -61,7 +59,6 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println("리턴" + m);
 		return m;
 		
 	}
