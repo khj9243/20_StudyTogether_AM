@@ -39,6 +39,7 @@ public class LectorWatchOpenEndServlet extends HttpServlet {
 			request.setAttribute("loc", "lectorWatch/lectorwatchOpen");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
+		
 		String path=getServletContext().getRealPath("/uploadAdd/lector/");
 		int maxSize=1024*1024*30;
 		MultipartRequest mr=new MultipartRequest(request,path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
@@ -50,10 +51,12 @@ public class LectorWatchOpenEndServlet extends HttpServlet {
 		String oriFileName=mr.getOriginalFileName("refLectorVideo");
 		String renamedFileName=mr.getFilesystemName("refLectorVideo");
 		int price=Integer.parseInt(mr.getParameter("price"));
-		
+		int level=Integer.parseInt(mr.getParameter("lectorLevel"));
 
-		LectorWatch lw=new LectorWatch(0,no,title,writer,intro,price,oriFileName,renamedFileName,null);
+		
+		LectorWatch lw=new LectorWatch(0,no,title,writer,intro,price,oriFileName,renamedFileName,null,level);
 		int result=new LectorService().insertLectorWatch(lw);
+		
 		String msg="";
 		String loc="";
 		

@@ -5,8 +5,8 @@
 
 
 <%
-Lector l=(Lector)request.getAttribute("lector");
-List<LectorWatch> list=(List)request.getAttribute("lwList");
+	Lector l=(Lector)request.getAttribute("lector");
+	List<LectorWatch> list=(List)request.getAttribute("lwList");
 %>
 
 
@@ -60,7 +60,6 @@ List<LectorWatch> list=(List)request.getAttribute("lwList");
 	 <%}
 	}%>
   </div>
- 
 </div>
 
 <div class="page">

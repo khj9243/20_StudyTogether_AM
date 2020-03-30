@@ -34,11 +34,9 @@ public class LectorWatchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int no=Integer.parseInt(request.getParameter("no"));
-
 		Lector l=new LectorService().selectLector(no);
 		//lectorWatch조회
 		List<LectorWatch> lwList=new LectorService().selectLectorWatch(no);
-		
 		
 		String msg="";
 		String loc="";

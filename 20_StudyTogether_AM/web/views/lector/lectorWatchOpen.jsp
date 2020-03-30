@@ -5,9 +5,9 @@
 <%
 	Lector l=(Lector)request.getAttribute("lector");
 %>
+
 <%@ include file="/views/common/header.jsp"%>
 <style>
-
 fieldset {
     box-sizing: border-box;
     font-family: Sunflower;
@@ -24,7 +24,6 @@ button{
     cursor: pointer;
     float: right;
 }
-
 </style>
 
 <!-- <div id="comment-container">
@@ -41,6 +40,7 @@ button{
 		
        <h2>강좌 추가하기 </h2><br>
     <form action="<%=request.getContextPath() %>/lectorWatch/lectorWatchOpenEnd" method="post" enctype="multipart/form-data">
+   	<input type="hidden" name="lectorLevel" value="1"/>
    <input type="text" name="lectorRef" value="<%=l.getLectorNo()%>" readonly/> 
      강사명 <input type="text" name="refWriter" value="<%=l.getLectorWriter()%>" readonly><br>
     강의 제목<input type="text" name="refTitle" required><br><br>
@@ -80,7 +80,6 @@ button{
             <br>
   <!-- 	썸네일 이미지<br>
             <input type="file" name="lectorImg" /><br><br> -->
-
             강좌 비디오 첨부<br>
             <input type="file" name="refLectorVideo"/><br><br> 
             <!-- 영상 첨부 추가 될 수 있도록!!!! 변경 -->

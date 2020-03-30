@@ -249,7 +249,7 @@ public class LectorDao {
 		String sql=prop.getProperty("insertLectorWatch");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,lw.getRefLectorNo());
+			pstmt.setInt(1,lw.getWatchNoRef());
 			pstmt.setString(2,lw.getWatchTitle());
 			pstmt.setString(3, lw.getWatchWriter());
 			pstmt.setString(4,lw.getWatchDetail());
@@ -281,7 +281,7 @@ public class LectorDao {
 			while(rs.next()) {
 				LectorWatch lw=new LectorWatch();
 				lw.setWatchNo(rs.getInt("lector_watch_no"));
-				lw.setRefLectorNo(rs.getInt("lector_watch_no_ref"));
+				lw.setWatchNoRef(rs.getInt("lector_watch_no_ref"));
 				lw.setWatchTitle(rs.getString("lector_watch_title"));
 				lw.setWatchWriter(rs.getString("lector_watch_writer"));
 				lw.setWatchDetail(rs.getString("lector_watch_detail"));
@@ -289,6 +289,7 @@ public class LectorDao {
 				lw.setWatchOriginalVideo(rs.getString("original_lector_watch_video"));
 				lw.setWatchRenamedVideo(rs.getString("renamed_lector_watch_video"));
 				lw.setWatchDate(rs.getDate("lector_watch_date"));
+				lw.setWatchLevel(rs.getInt("lector_watch_level"));
 				list.add(lw);
 			}
 		}catch(SQLException e) {
@@ -309,11 +310,10 @@ public class LectorDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
-		
 			if(rs.next())
 			lw=new LectorWatch();
 			lw.setWatchNo(rs.getInt("lector_watch_no"));
-			lw.setRefLectorNo(rs.getInt("lector_watch_no_ref"));
+			lw.setWatchNoRef(rs.getInt("lector_watch_no_ref"));
 			lw.setWatchTitle(rs.getString("lector_watch_title"));
 			lw.setWatchWriter(rs.getString("lector_watch_writer"));
 			lw.setWatchDetail(rs.getString("lector_watch_detail"));
@@ -321,7 +321,6 @@ public class LectorDao {
 			lw.setWatchOriginalVideo(rs.getString("original_lector_watch_video"));
 			lw.setWatchRenamedVideo(rs.getString("renamed_lector_watch_video"));
 			lw.setWatchDate(rs.getDate("lector_watch_date"));
-		
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
