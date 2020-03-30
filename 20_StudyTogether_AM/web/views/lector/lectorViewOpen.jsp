@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@page import="java.util.List,com.kh.lector.model.vo.Lector" %>
 
 <%
@@ -39,7 +40,7 @@ button{
 		
 		
        <h2>강좌 추가하기 </h2><br>
-    <form action="<%=request.getContextPath() %>/lectorWatch/lectorWatchOpenEnd" method="post" enctype="multipart/form-data">
+    <form action="<%=request.getContextPath() %>/lector/lectorViewOpenEnd" method="post" enctype="multipart/form-data">
    	<input type="hidden" name="lectorLevel" value="1"/>
    <input type="text" name="lectorRef" value="<%=l.getLectorNo()%>" readonly/> 
      강사명 <input type="text" name="refWriter" value="<%=l.getLectorWriter()%>" readonly><br>

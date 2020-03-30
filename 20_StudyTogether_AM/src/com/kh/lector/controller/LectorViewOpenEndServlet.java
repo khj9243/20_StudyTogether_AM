@@ -1,4 +1,4 @@
-package com.kh.lectorWatch.controller;
+package com.kh.lector.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.lector.model.service.LectorService;
-import com.kh.lectorWatch.model.vo.LectorWatch;
+import com.kh.lector.model.vo.LectorWatch;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
  * Servlet implementation class LectorWatchEndServlet
  */
-@WebServlet("/lectorWatch/lectorWatchOpenEnd")
-public class LectorWatchOpenEndServlet extends HttpServlet {
+@WebServlet("/lector/lectorViewOpenEnd")
+public class LectorViewOpenEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LectorWatchOpenEndServlet() {
+    public LectorViewOpenEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,11 +36,11 @@ public class LectorWatchOpenEndServlet extends HttpServlet {
 
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			request.setAttribute("msg", "업로드 에러");
-			request.setAttribute("loc", "lectorWatch/lectorwatchOpen");
+			request.setAttribute("loc", "lectorView/lectorViewOpen");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		
-		String path=getServletContext().getRealPath("/uploadAdd/lector/");
+		String path=getServletContext().getRealPath("/upload/lector/");
 		int maxSize=1024*1024*30;
 		MultipartRequest mr=new MultipartRequest(request,path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		
@@ -50,9 +50,9 @@ public class LectorWatchOpenEndServlet extends HttpServlet {
 		String intro=mr.getParameter("refIntro");
 		String oriFileName=mr.getOriginalFileName("refLectorVideo");
 		String renamedFileName=mr.getFilesystemName("refLectorVideo");
+		
 		int price=Integer.parseInt(mr.getParameter("price"));
 		int level=Integer.parseInt(mr.getParameter("lectorLevel"));
-
 		
 		LectorWatch lw=new LectorWatch(0,no,title,writer,intro,price,oriFileName,renamedFileName,null,level);
 		int result=new LectorService().insertLectorWatch(lw);
@@ -62,11 +62,11 @@ public class LectorWatchOpenEndServlet extends HttpServlet {
 		
 		if(result>0) {
 			msg="등록 완료";
-			loc="/lector/lectorWatch?no="+mr.getParameter("lectorRef");
+			loc="/lector/lectorView?no="+mr.getParameter("lectorRef");
 		}
 		else {
 			msg="등록 실패";
-			loc="/lectorWatch/lectorwatchOpen";
+			loc="/lector/lectorViewOpen";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

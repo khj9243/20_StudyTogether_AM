@@ -23,10 +23,8 @@ button{
        <h2>강좌 개설</h2><br>
     <form id="frmOpen" action="<%=request.getContextPath()%>/lector/lectorOpenEnd" method="post" enctype="multipart/form-data">
      강사명 <input type="text" name="lectorWriter"><br>
-
        <input type="hidden" name="lectorDate" ><br>
         강좌 이름 <input type="text" name="lectorTitle" required><br><br>
-       
         강좌 분야
       <select id="searchType" name="searchType"> 
      	<option value="카테고리">카테고리</option>
@@ -67,6 +65,6 @@ button{
              
                 <input type="submit" value="등록">
                 <input type="reset" value="취소">
-       </form>  
+       </form>
 
 <%@ include file="/views/common/footer.jsp"%>

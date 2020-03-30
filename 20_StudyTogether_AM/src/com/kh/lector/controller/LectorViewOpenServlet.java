@@ -1,4 +1,4 @@
-package com.kh.lectorWatch.controller;
+package com.kh.lector.controller;
 
 import java.io.IOException;
 
@@ -15,14 +15,14 @@ import com.kh.lector.model.vo.Lector;
 /**
  * Servlet implementation class LectorInsertServlet
  */
-@WebServlet("/lectorWatch/lectorwatchOpen")
-public class LectorWatchOpenServlet extends HttpServlet {
+@WebServlet("/lector/lectorViewOpen")
+public class LectorViewOpenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LectorWatchOpenServlet() {
+    public LectorViewOpenServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class LectorWatchOpenServlet extends HttpServlet {
 		request.setAttribute("lector", l);
 		System.out.println(l);
 		//화면 전환용 서블릿
-		request.getRequestDispatcher("/views/lector/lectorWatchOpen.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/lector/lectorViewOpen.jsp").forward(request, response);
 	
 	}
 

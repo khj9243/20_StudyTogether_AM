@@ -58,6 +58,8 @@ public class LectorOpenEndServlet extends HttpServlet {
 		String renamedFileName=mr.getFilesystemName("lectorImg");
 		String oriVideo=mr.getOriginalFileName("lectorVideo");
 		String renamedVideo=mr.getFilesystemName("lectorVideo");
+		System.out.println(oriVideo);
+		System.out.println(renamedVideo);
 
 		Lector l=new Lector(0,title,writer,category,intro,price,oriFileName,renamedFileName,oriVideo,renamedVideo,null,"Y");
 		int result=new LectorService().insertLector(l);

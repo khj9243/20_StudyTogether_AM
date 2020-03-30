@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.lector.model.vo.Lector;
-import com.kh.lectorWatch.model.vo.LectorWatch;
+import com.kh.lector.model.vo.LectorWatch;
 
 public class LectorDao {
 
@@ -267,7 +267,7 @@ public class LectorDao {
 
 
 
-//lectorWatch조회
+//lectorWatch조회-1회에 list로 출력되는 강좌들 목록
 	public List<LectorWatch> selectLectorWatch(Connection conn, int no) {
 		
 		PreparedStatement pstmt=null;
@@ -301,6 +301,8 @@ public class LectorDao {
 		return list;
 	}
 
+	
+	
 	public LectorWatch selectLectorWatchView(Connection conn, int no) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -310,7 +312,7 @@ public class LectorDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
-			if(rs.next())
+			if(rs.next()) {
 			lw=new LectorWatch();
 			lw.setWatchNo(rs.getInt("lector_watch_no"));
 			lw.setWatchNoRef(rs.getInt("lector_watch_no_ref"));
@@ -321,6 +323,7 @@ public class LectorDao {
 			lw.setWatchOriginalVideo(rs.getString("original_lector_watch_video"));
 			lw.setWatchRenamedVideo(rs.getString("renamed_lector_watch_video"));
 			lw.setWatchDate(rs.getDate("lector_watch_date"));
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

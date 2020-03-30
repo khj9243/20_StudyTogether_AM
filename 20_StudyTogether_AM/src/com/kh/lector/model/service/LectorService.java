@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.kh.lector.model.dao.LectorDao;
 import com.kh.lector.model.vo.Lector;
-import com.kh.lectorWatch.model.vo.LectorWatch;
+import com.kh.lector.model.vo.LectorWatch;
 
 public class LectorService {
 

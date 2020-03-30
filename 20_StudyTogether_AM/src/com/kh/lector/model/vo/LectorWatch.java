@@ -1,4 +1,4 @@
-package com.kh.lectorWatch.model.vo;
+package com.kh.lector.model.vo;
 
 import java.util.Date;
 
