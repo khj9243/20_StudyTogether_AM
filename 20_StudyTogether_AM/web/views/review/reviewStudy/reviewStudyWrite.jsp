@@ -6,14 +6,14 @@
   <!-- 참여한 강좌가 없으면 row가 0이면..등록이 안되도록
 참여한 강좌 리스트에는 로그인 되어있는 강좌만 표시 되도롣!!!! -->
 
-<form style="margin:0 auto;">
+<form style="margin:0 auto;" action="<%=request.getContextPath() %>/review/reviewFormEnd">
 <h2 id="revWTitle">스터디후기작성</h2>
    <table class="revWrite">
       <tr>
         <td>작성자</td>
         <td><%=loginMember.getUserId() %><input type="hidden" name="writer" value="<%=loginMember.getUserId()%>" readonly required/></td>
        </tr>
-        
+      
         <tr>
             <td>스터디</td>
             <td>
@@ -76,7 +76,7 @@
         </tr>
         <tr>
             <td>만족도</td>
-            <td><p id="star_grade">
+            <td><p id="star_grade" name="star">
                 <a href="#">★</a>
                 <a href="#">★</a>
                 <a href="#">★</a>
@@ -93,7 +93,7 @@
    <br>
  		<div id="revWBtn">
           <button type="reset" onclick ="cancelChk()" id="revWCancelBtn" >취소</button>
-          <button onclick="revWriteChk()" type="submit" id="revWenrollBtn">등록</button>
+          <button type="submit" id="revWenrollBtn">등록</button>
        	</div>
 
 </form>
@@ -114,8 +114,6 @@
                   return false;
                }
            }
-          function revWriteChk(){
-             
-          }
+          
       </script>
 <%@ include file="/views/common/footer.jsp"%>

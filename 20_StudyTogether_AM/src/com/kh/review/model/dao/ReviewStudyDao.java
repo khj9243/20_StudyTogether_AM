@@ -75,5 +75,23 @@ public class ReviewStudyDao {
 		}
 		return list;
 	}
+	public int insertReviewStudy(Connection conn, ReviewStudy revS) {
+		PreparedStatement pstmt=null; //변경되는게 없어
+		int result=0;
+		String sql=prop.getProperty("insertReviewStudy");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, revS.getReviewStuWriter());
+			pstmt.setString(2, revS.getStudyName());
+			pstmt.setString(3, revS.getReviewStuCategory());
+			pstmt.setInt(4, revS.getReviewStuStar());
+			pstmt.setString(5, revS.getReviewStuContent());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;//null이거나 값이 있거나
+	}
 
 }
