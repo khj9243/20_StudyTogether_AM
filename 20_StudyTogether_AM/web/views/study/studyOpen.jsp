@@ -10,13 +10,13 @@
          <table class="openWrite">
                  <tr>
                      <td>스터디<br>이름</td>
-                     <td><input type="hidden" name="studyWriter" value=""></td>
-                     <td><input type = "text" name = "studyName" size=50> </td>
+                     <td>개설자<input type="text" name="studyWriter" value=""></td>
+                     <td>스터디명<input type = "text" name = "studyName" size=50> </td>
                  </tr>
                  <tr>
                      <td> 희망 지역</td>
                      <td>
-                         <select name="studyArea" > <!--multiple 옵션도 가능-->
+                         <select name="studyArea" > 
                          <option value="지역">지역</option>
                          <optgroup label="서울">
                              <option value="강남">강남</option>
