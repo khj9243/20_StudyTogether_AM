@@ -30,40 +30,43 @@ $(function(){
 			dataType:"json",
 			type:"post",
 			data:{"id":$(this).val().trim()},
-			async: false, //결과값 받아서 if분기문에 사용해야하므로 동기로 전환
+			//async: false, //결과값 받아서 if분기문에 사용해야하므로 동기로 전환
 			success:function(data) {
 				console.log(data.result);
 				str=data.result;
+				
+				
+				var userIdCheck = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
+		        if(!$(this).val().trim()==""){        	
+		        	console.log(str);
+		        	//db에 아이디가 있지 않고, 유효성검증 통과
+		        	if(str=="NO"){
+		                 $("#alert-idSuccess").hide();
+		                 $("#alert-idDanger").hide();
+		                 $("#alert-idDuplicated").show();
+		                 $("#submit").attr("disabled", "disabled");
+		            }else if(!userIdCheck.test($(this).val().trim())){  
+		                $("#alert-idSuccess").hide();
+		                $("#alert-idDanger").show();
+		                $("#alert-idDuplicated").hide();
+		                $("#submit").attr("disabled", "disabled");
+		            }else {
+		            	$("#alert-idSuccess").show();
+		            	$("#alert-idDanger").hide();
+		            	$("#alert-idDuplicated").hide();
+		            	$("#submit").removeAttr("disabled");
+		            	joinFlag=true;
+		            } 
+		        }else{
+		            $("#alert-idSuccess").hide();
+		            $("#alert-idDanger").hide();
+		            $("#alert-idDuplicated").hide();
+		            $("#submit").attr("disabled", "disabled");
+		        }
 			}
 		});
     	
-        var userIdCheck = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
-        if(!$(this).val().trim()==""){        	
-        	console.log(str);
-        	//db에 아이디가 있지 않고, 유효성검증 통과
-        	if(str=="NO"){
-                 $("#alert-idSuccess").hide();
-                 $("#alert-idDanger").hide();
-                 $("#alert-idDuplicated").show();
-                 $("#submit").attr("disabled", "disabled");
-            }else if(!userIdCheck.test($(this).val().trim())){  
-                $("#alert-idSuccess").hide();
-                $("#alert-idDanger").show();
-                $("#alert-idDuplicated").hide();
-                $("#submit").attr("disabled", "disabled");
-            }else {
-            	$("#alert-idSuccess").show();
-            	$("#alert-idDanger").hide();
-            	$("#alert-idDuplicated").hide();
-            	$("#submit").removeAttr("disabled");
-            	joinFlag=true;
-            } 
-        }else{
-            $("#alert-idSuccess").hide();
-            $("#alert-idDanger").hide();
-            $("#alert-idDuplicated").hide();
-            $("#submit").attr("disabled", "disabled");
-        }
+        
     });
     
     //비밀번호 유효값 체크

@@ -78,6 +78,8 @@
 	 <ul class="pagination">
 		<%=request.getAttribute("pageBar") %>
 	</ul> 
+
+</section>
 	
 <script>
     $( document ).ready( function() {
