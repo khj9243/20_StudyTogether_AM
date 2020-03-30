@@ -102,17 +102,17 @@
       <button type="submit">검색</button>
 </div>
 </div>
- <%if(list.isEmpty()){ %>
-<div class="list_start">
-<h3>검색된 강좌가 없습니다.</h3>
+<%if(list.isEmpty()){ %>
+	<div class="list_start">
+		<h3>검색된 강좌가 없습니다.</h3>
 <%}else{ %>
 	<%for(Study s:list){ %>
-  <a href="<%=request.getContextPath()%>/study/studyWatch?no=<%=s.getStudyNo()%>">
-    <div class="list_detail">
-      <h4><%=s.getStudyCategory() %></h4>
-      <%if(s.getOriImg()!=null){ %>
-      <div>
-        <img src="<%=request.getContextPath() %>/upload/study/<%=s.getOriImg() %>" class="" width="200px" height="150px">
+  	<a href="<%=request.getContextPath()%>/study/studyWatch?no=<%=s.getStudyNo()%>">
+    	<div class="list_detail">
+      		<h4><%=s.getStudyCategory() %></h4>
+     <%if(s.getOriImg()!=null){ %>
+      	<div>
+    <img src="<%=request.getContextPath() %>/upload/study/<%=s.getOriImg() %>" class="" width="200px" height="150px">
       </div>
       <%} %>
       <div id="lectorTitle"><%=s.getStudyName() %><br/></div>
@@ -121,158 +121,13 @@
   <%}
  }%>
 </div>
+
+
+
  	<ul class="pagination">
 		<%=request.getAttribute("pageBar") %>
 	</ul> 
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-<div class="list_start">
-  <a href="강좌 시청.html">
-    <div class="list_detail">
-      <h4>카테고리</h4>
-      <div>
-        <img src="img/1.jpg" class="" width="200px" height="150px">  
-      </div>
-      <div id="lectorTitle">강성태의 영문법</div>
-    </div>
-  </a>
-</div>
-
-
- <ul class="pagination"></ul> 
+	
 </section>
 
     <script>
