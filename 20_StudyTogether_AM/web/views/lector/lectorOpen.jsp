@@ -63,8 +63,11 @@ button{
             <!-- 영상 첨부 추가 될 수 있도록!!!! 변경 -->
             가격<br>
             <input type="number" name="price" placeholder="숫자만 입력">원<br><br>
-=======
- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/lecStuOpen.css" type="text/css"/>
+            
+            <input type="submit" value="등록">
+                <input type="reset" value="취소">
+     </form>
+<%-- <%--  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/lecStuOpen.css" type="text/css"/>
 <form style="margin:0 auto;" action="<%=request.getContextPath() %>/lector/">
  <br>
  <h2 id="openTitle">강좌 개설</h2>
@@ -161,8 +164,7 @@ button{
                  <div align="center">
                      <button type="reset" onclick = "cancelChk()" id="openCancleBtn">취소</button>
                      <button type="submit" onclick="" id="openEnrollBtn">승인요청</button>
-                 </div>
-
+                 </div> --%> --%>
  </form>
  <script>
          function cancelChk(){
@@ -172,6 +174,5 @@ button{
                   return false;
                }
            }
-
         </script>
 <%@ include file="/views/common/footer.jsp"%>

@@ -7,15 +7,16 @@
 <form style="margin:0 auto;" id="frmOpen" action="<%=request.getContextPath()%>/study/studyOpenEnd" method="post" enctype="multipart/form-data">
  <br>
  <h2 id="openTitle">스터디 개설</h2>
-         <table class = "openWrite">
+         <table class="openWrite">
                  <tr>
                      <td>스터디<br>이름</td>
+                     <td><input type="hidden" name="studyWriter" value=""></td>
                      <td><input type = "text" name = "studyName" size=50> </td>
                  </tr>
                  <tr>
                      <td> 희망 지역</td>
                      <td>
-                         <select name="area" > <!--multiple 옵션도 가능-->
+                         <select name="studyArea" > <!--multiple 옵션도 가능-->
                          <option value="지역">지역</option>
                          <optgroup label="서울">
                              <option value="강남">강남</option>
@@ -65,7 +66,7 @@
 
                  <tr>
                      <td>스터디<br>분야</td>
-                     <td><select name="field" > 
+                     <td><select name="studyCategory" > 
                          <option value="카테고리">카테고리</option>
                          <optgroup label="어학,회화">
                              <option value="불어">불어</option>
@@ -118,8 +119,8 @@
                  <tr>
                      <td>희망 일자</td>
                      <td> 
-                         <input type="checkbox" id="week">평일
-                         <input type="checkbox" id="weekend">주말
+                         <input type="checkbox" id="week" name="day">평일
+                         <input type="checkbox" id="weekend" name="day">주말
                      </td>
                  </tr>
                  <tr>
@@ -131,25 +132,24 @@
                  <tr>
                      <td>모집기간</td>
                      <td>
-                          <input type="date" name="endPeriod" id="endPeriod">까지
+                          <input type="date" name="endDate" id="endPeriod">까지
                      </td>
                  </tr>
-
+<!-- 
                  <tr>
                      <td>한줄 소개</td>
                      <td> <textarea name="intro1" cols="85" rows="2" style="resize: none;"  placeholder="*이 강좌의 특성을 간단하게 소개해주세요."></textarea></td>
-                 </tr>
+                 </tr> -->
 
                  <tr>
                      <td>상세 소개</td>
-                     <td><textarea name="intro1"cols="85" rows="10" style="resize: none;"  placeholder="*이 강좌에 대해 자세히 소개해주세요."></textarea></td>
+                     <td><textarea name="intro1" cols="85" rows="10" style="resize: none;"  placeholder="*이 강좌에 대해 자세히 소개해주세요."></textarea></td>
                  </tr>
                  <br>
                  <tr>
                      <td>썸네일<br>이미지</td>
-                     <td><input type="file" name="upfile" accept="image/*"/></td>
+                     <td><input type="file" name="thumbnail" accept="image/*"/></td>
                  </tr>
-                
                  </table>
 				<br>
                  <div align="center">

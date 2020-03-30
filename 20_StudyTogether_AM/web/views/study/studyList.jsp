@@ -14,7 +14,6 @@
   <div class="make">
     <a href="<%=request.getContextPath()%>/study/studyOpen"><img src="<%=request.getContextPath() %>/images/owl.JPG" width="100px" height="auto" ><br><p>스터디개설하기</p></a>
   </div>
-  
   <div id=studytitle>스터디 찾기 </div>
 	<div class="main_list">
 	 <!-- 상단 제목 -->

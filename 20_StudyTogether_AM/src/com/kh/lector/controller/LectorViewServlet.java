@@ -8,10 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.kh.lector.model.service.LectorService;
 import com.kh.lector.model.vo.Lector;
-import com.kh.lector.model.vo.LectorWatch;
 
 /**
  * Servlet implementation class LectorWatch
@@ -36,8 +34,6 @@ public class LectorViewServlet extends HttpServlet {
 		int no=Integer.parseInt(request.getParameter("no"));
 		Lector l=new LectorService().selectLector(no);
 		
-		//lectorWatch조회
-		List<LectorWatch> lwList=new LectorService().selectLectorWatch(no);
 		
 		String msg="";
 		String loc="";
@@ -49,7 +45,6 @@ public class LectorViewServlet extends HttpServlet {
 			
 		}else {
 			request.setAttribute("lector", l);
-			request.setAttribute("lwList", lwList);
 			request.getRequestDispatcher("/views/lector/lectorView.jsp").forward(request, response);
 		}
 	}

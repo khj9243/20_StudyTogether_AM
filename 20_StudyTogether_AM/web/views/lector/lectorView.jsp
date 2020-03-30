@@ -6,7 +6,7 @@
 
 <%
 	Lector l=(Lector)request.getAttribute("lector");
-	List<LectorWatch> list=(List)request.getAttribute("lwList");
+	
 %>
 
 
@@ -15,13 +15,19 @@
 
 
 <section>
- <div class="container">
+ <div class="container" >
     <%-- <a href="<%=request.getContextPath() %>/lectorWatch/lectorInsert" class="btn btn-info" role="button">강좌 추가</a> --%>
     <a href="<%=request.getContextPath()%>/lector/lectorViewOpen?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 추가</a>
     <a href="<%=request.getContextPath()%>/lector/lectorUpdate?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 수정</a>
     <a href="<%=request.getContextPath() %>/lector/lectorDelete?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 삭제</a><!--관리자만 삭제  -->
   </div>
-  
+<style>
+.btn btn-info{
+background-color:#ffc107;
+}
+
+</style>
+
 
 <!--분기처리해서 강좌개설자&admin에게만 보일수 있는 강좌추가,수정,(삭제는 관리자페이지에서만가능) 버튼  -->
   
@@ -35,22 +41,19 @@
     <div class="video">
       <!-- 855*481 -->
      <%if(l!=null&&l.getLectorOriginalVideo()!=null) {%>
-	<video id="video" controls width="855px" height="481px"></video>
+	<video src="<%=request.getContextPath() %>/upload/lector/<%=l.getLectorOriginalVideo() %>" id="video" controls width="855px" height="481px"></video>
     <%}%>
  	</div>
-    <div class="video-inform">
+    <div id="video-inform">
     <%=l.getLectorDetail() %>
-   
-      </p>
     </div>
     <button type="button" class="basket" onclick="apply();">수강신청</button>
   </div>
- 
 
-<p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
-
+<%-- <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
+ --%>
 <!--강좌 추가한것  -->
-<div class="container">
+<%-- <div class="container">
   <div class="list-group">
     <a href="javascript:void(0)" onclick="changeLector('<%=l.getLectorNo()%>')" class="list-group-item list-group-item-action"><%=l.getLectorTitle() %></a>
   	<%if(list!=null&&!list.isEmpty()){
@@ -59,19 +62,21 @@
 	 <%}
 	}%>
   </div>
-</div>
+</div> --%>
 
-<div class="page">
+
+<!-- <div class="page">
 <ul class="pagination">
   <li class="page-item"><a class="page-link" href="#">이전</a></li>
   <li class="page-item"><a class="page-link" href="#">1</a></li>
   <li class="page-item"><a class="page-link" href="#">다음</a></li>
 </ul>
-</div>
-
+</div> -->
 </section>
+
 <script>
 
+//동영상만 바뀌는 ajax
 function changeLector(pNo, cNo){
 	$.ajax({
 		url:"<%=request.getContextPath()%>/lector/videoSource",
@@ -82,11 +87,14 @@ function changeLector(pNo, cNo){
 			//alert("sadf");
 			console.log(data);
 			console.log($("#video"));
+			//비디오
 			$("#video").attr("src","<%=request.getContextPath()%>/upload/lector/"+data);
+			//콘텐트
+			
 			console.log($("#video"));
 		},
 		error:function(r,e,m){
-			console.log(r);
+			//console.log(r);
 		}
 	})
 }

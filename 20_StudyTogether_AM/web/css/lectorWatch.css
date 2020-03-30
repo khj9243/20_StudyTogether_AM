@@ -22,7 +22,7 @@
     margin-top: 50px;
    }
    /* 영상소개 */
-   .video-inform{
+   #video-inform{
     display: block;
     font-size: 25px;
     margin: 50px 100px 100px 100px;
