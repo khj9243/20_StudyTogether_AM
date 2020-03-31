@@ -42,6 +42,7 @@ public class ReviewStudyService {
 		Connection conn = getConnection();
 		ReviewStudy revS = dao.searchReviewStudy(conn,no);
 		close(conn);
+		System.out.println("service revS" + revS);
 		return revS;
 	}
 

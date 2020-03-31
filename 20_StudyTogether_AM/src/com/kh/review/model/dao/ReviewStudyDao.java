@@ -118,6 +118,7 @@ public class ReviewStudyDao {
 			close(rs);
 			close(pstmt);
 		}
+		System.out.println("dao revS" + revS);
 		return revS;//null이거나 값이 있거나
 	}
 

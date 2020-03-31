@@ -15,6 +15,7 @@
                     <li class="nav-item ml-5"><a class="text-decoration-none text-dark" href="<%=request.getContextPath()%>/member/memberView">내 계정 정보</a></li>
                     <li class="nav-item ml-5"><a class="text-decoration-none text-dark" href="#">내 일반스터디</a></li>
                     <li class="nav-item ml-5"><a class="text-decoration-none text-dark" href="#">내 강좌</a></li>
+                    <li class="nav-item ml-5"><a class="text-decoration-none text-dark" href="<%=request.getContextPath()%>/payment/paymentForm">구매Test</a></li>
                 </ul>
             </nav>
         </div>
