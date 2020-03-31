@@ -6,6 +6,9 @@
 <%
 	Lector l=(Lector)request.getAttribute("lector");
 	List<LectorChannel> clist=(List)request.getAttribute("clist");
+ 	int cPage=(int)request.getAttribute("cPage");
+
+	
 %>
 
 <%@ include file="/views/common/header.jsp"%>
@@ -61,12 +64,24 @@ background-color:#ffc107;
   </div>
 </div>
 
-<div class="page">
+ <ul class="pagination">
+		<%=request.getAttribute("pageBar") %>
+	</ul> 
+<style>
+	.pagination{
+		margin-left:550px;
+		margin-top:100px;
+		margin-bottom:100px;	
+	}
+
+</style>
+
+<!-- <div class="page">
 <ul class="pagination">
   <li class="page-item"><a class="page-link" href="#">이전</a></li>
   <li class="page-item"><a class="page-link" href="#">1</a></li>
   <li class="page-item"><a class="page-link" href="#">다음</a></li>
-</ul>
+</ul> -->
 
 <%-- </div>
  <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>

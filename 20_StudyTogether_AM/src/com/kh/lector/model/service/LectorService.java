@@ -87,6 +87,20 @@ public class LectorService {
 		close(conn);
 		return list;
 	}
+
+	public List<LectorChannel> searchChannel(int no, int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<LectorChannel> list=dao.searchChannel(conn,no,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int channelCount() {
+		Connection conn=getConnection();
+		int result=dao.channelCount(conn);
+		close(conn);
+		return result;
+	}
 	
 
 	

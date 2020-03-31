@@ -54,7 +54,7 @@ public class ChannelOpenEndServlet extends HttpServlet {
 		String oriFile=mr.getOriginalFileName("video");
 		String renameFile=mr.getFilesystemName("video");
 		
-		LectorChannel lc=new LectorChannel(0,noRef,title,writer,detail,price,oriFile,renameFile,null,0);
+		LectorChannel lc=new LectorChannel(0,noRef,title,writer,detail,price,oriFile,renameFile,null,0,null);
 		int result=new LectorService().insertChannelLector(lc);
 		System.out.println(result);
 		String msg="";

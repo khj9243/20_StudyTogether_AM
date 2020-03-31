@@ -14,6 +14,7 @@ public class LectorChannel {
 	 private String channelRenamedVideo;
 	 private Date ChannelEnrollDate;
 	 private int channelLevel;
+	 private String channel_assign;
 	 
 	 
 	public LectorChannel() {
@@ -23,7 +24,7 @@ public class LectorChannel {
 
 	public LectorChannel(int channelNo, int channelNoRef, String channelTitle, String channelWriter,
 			String channelDetail, int channelPrice, String channelOriginalVideo, String channelRenamedVideo,
-			Date channelEnrollDate, int channelLevel) {
+			Date channelEnrollDate, int channelLevel, String channel_assign) {
 		super();
 		this.channelNo = channelNo;
 		this.channelNoRef = channelNoRef;
@@ -35,9 +36,8 @@ public class LectorChannel {
 		this.channelRenamedVideo = channelRenamedVideo;
 		ChannelEnrollDate = channelEnrollDate;
 		this.channelLevel = channelLevel;
+		this.channel_assign = channel_assign;
 	}
-	
-	
 
 
 	public int getChannelNo() {
@@ -140,13 +140,23 @@ public class LectorChannel {
 	}
 
 
+	public String getChannel_assign() {
+		return channel_assign;
+	}
+
+
+	public void setChannel_assign(String channel_assign) {
+		this.channel_assign = channel_assign;
+	}
+
+
 	@Override
 	public String toString() {
 		return "LectorChannel [channelNo=" + channelNo + ", channelNoRef=" + channelNoRef + ", channelTitle="
 				+ channelTitle + ", channelWriter=" + channelWriter + ", channelDetail=" + channelDetail
 				+ ", channelPrice=" + channelPrice + ", channelOriginalVideo=" + channelOriginalVideo
 				+ ", channelRenamedVideo=" + channelRenamedVideo + ", ChannelEnrollDate=" + ChannelEnrollDate
-				+ ", channelLevel=" + channelLevel + "]";
+				+ ", channelLevel=" + channelLevel + ", channel_assign=" + channel_assign + "]";
 	}
 	
 
