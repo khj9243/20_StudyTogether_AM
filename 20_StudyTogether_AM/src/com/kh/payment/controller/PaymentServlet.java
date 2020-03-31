@@ -26,13 +26,6 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String name=(String)request.getParameter("name");
-		String email=(String)request.getParameter("name");
-		String phone=(String)request.getParameter("name");
-		String address=(String)request.getParameter("name");
-		String stotalPrice=(String)request.getParameter("name");
-		int totalPrice=Integer.parseInt(request.getParameter("name"));
 		request.getRequestDispatcher("/views/payment/paymentTest.jsp").forward(request, response);
 	}
 

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<form action="<%=request.getContextPath()%>/payment/paymentTest">
+	<form action="<%=request.getContextPath()%>/payment/paymentTest" method="post">
 		<p>
 			<span>name:</span> <input name="name">
 			<!-- 값 가져오기 -->
