@@ -33,10 +33,22 @@ public class LectorViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int no=Integer.parseInt(request.getParameter("no"));
+		int no=Integer.parseInt(request.getParameter("pno"));
 		Lector l=new LectorService().selectLector(no);
-		//페이징처리시작
+		LectorChannel lc=new LectorService().selectChannel(no);
 		
+		//int cNo=Integer.parseInt(request.getParameter("cNo"));
+		//List<LectorChannel> list=new LectorService().searchLector(cPage,numPerPage);
+
+		
+		
+		//페이징처리시작
+		/*	1.	cPage : 현재 페이지를 의미(1페이지를 보고있는지 2페이지를 보고있는지)
+		2.	numPerPage : 한 개 페이지에 출력될 데이터 수
+		3.	totalData : 총 데이터수(총 로우수)
+		4.	totalPage : 총 페이지 수 (페이지는 하나의 구역이라고 보면됨)
+		5.	pageBarSize : 화면에 출력할 페이지 번호 개수 
+		6.	pageNo : 출력할 페이지의 시작번호*/
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -47,6 +59,8 @@ public class LectorViewServlet extends HttpServlet {
 		
 		///lectorView에서 채널  리스트로불러오는 메서드
 		List<LectorChannel> clist=new LectorService().searchChannel(no,cPage,numPerPage);
+//list로 불러와서 페이징처리하는법???????????????		
+		
 		
 		//pageBar만들기
 		int totalChannel=new LectorService().channelCount();//1
@@ -58,28 +72,36 @@ public class LectorViewServlet extends HttpServlet {
 		
 		String pageBar="";
 		
-		
+		//페이징처리시 필요한것 pNo,cNo,cPage
+		//페이지바가 표시되어야할시점:clist가 5이상일때,엄마채널의 관련된 영상에 대한것만 페이지바가 구성이되어야함
+
 		if(pageNo==1) {
 			pageBar+="<li class='page-item'><a class='page-link'>이전</a></li>";
 			
+		}else if(pageNo>1){
+			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+(pageNo-1)+"&pNo="+no+"'>이전</a>";
+
 		}else {
-			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/lectorView?cPage="+(pageNo-1)+"'>이전</a>";
+			pageBar="";
 		}
 		
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
+			//시작페이지번호가 끝페이지번호보다 크지않거나 시작페이지번호가 전체페이지보다 크지않으면
 			if(pageNo==cPage) {
 				pageBar+="<li class='page-item'><a class='page-link'  style='background-color: lightblue; color:black; '>"+pageNo+"</a></li>";
 			}else {
-				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/lectorView?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+pageNo+"&pNo="+no+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		
-		if(pageNo>totalPage) {
+		if(pageNo>totalPage&&pageNo==1) {
 		
 				pageBar+="<li class='page-item'><a class='page-link'>다음</a></li>";
+			}else if(clist.size()>5) {
+				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+(pageNo)+"&pNo="+no+"'>다음</a>";
 			}else {
-				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/lectorView?cPage="+(pageNo)+"'>다음</a>";
+				pageBar="";
 			}
 		
 		String msg="";
@@ -89,7 +111,6 @@ public class LectorViewServlet extends HttpServlet {
 			request.setAttribute("msg", "조회할 강좌가 없습니다.");
 			request.setAttribute("loc", "lector/lectorList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-			
 		}else {
 			request.setAttribute("clist", clist);
 			request.setAttribute("lector", l);
@@ -99,7 +120,6 @@ public class LectorViewServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/lector/lectorView.jsp").forward(request, response);
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

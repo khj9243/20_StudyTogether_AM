@@ -56,30 +56,28 @@ background-color:#ffc107;
 <%if(!clist.isEmpty()){ %>
   <div class="list-group">
     <%for(LectorChannel lc:clist){ %>
-    <a href="<%=request.getContextPath() %>/lector/channelView?cNo=<%=l.getLectorNo() %>" class="list-group-item list-group-item-action"><%=lc.getChannelTitle() %></a>
-	<%}
+    <a href="<%=request.getContextPath() %>/lector/channelView?pNo=<%=l.getLectorNo() %>&cNo=<%=lc.getChannelNo() %>" class="list-group-item list-group-item-action"><%=lc.getChannelTitle() %></a>
+  <%}
 	}%>
   </div>
 </div>
 
- <ul class="pagination">
+
+ 	<ul class="pagination">
 		<%=request.getAttribute("pageBar") %>
 	</ul> 
+
+ 
 <style>
 	.pagination{
-		margin-left:550px;
+		margin-left:600px;
 		margin-top:100px;
 		margin-bottom:100px;	
 	}
 
 </style>
 
-<!-- <div class="page">
-<ul class="pagination">
-  <li class="page-item"><a class="page-link" href="#">이전</a></li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item"><a class="page-link" href="#">다음</a></li>
-</ul> -->
+
 
 <%-- </div>
  <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
@@ -94,14 +92,6 @@ background-color:#ffc107;
   </div> 
 </div> --%>
 
-
-<!-- <div class="page">
-<ul class="pagination">
-  <li class="page-item"><a class="page-link" href="#">이전</a></li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item"><a class="page-link" href="#">다음</a></li>
-</ul>
-</div> -->
 </section>
 
  <script>
@@ -138,7 +128,7 @@ var result= confirm("장바구니에 강좌를 담았습니다. 장바구니로 
    location.reload;
  }
 }
-
+ 
 </script>
 
 <%@ include file="/views/common/footer.jsp"%>
