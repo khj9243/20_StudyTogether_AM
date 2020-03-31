@@ -1,4 +1,4 @@
-package com.kh.lector.controller;
+package com.kh.study.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,19 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.lector.model.service.LectorService;
 import com.kh.lector.model.vo.Lector;
-import com.kh.lector.model.vo.LectorWatch;
+import com.kh.study.model.service.StudyService;
+import com.kh.study.model.vo.Study;
 
 /**
- * Servlet implementation class LectorChangeServlet
+ * Servlet implementation class StudyViewServlet
  */
-@WebServlet("/lector/videoSource")
-public class LectorChangeServlet extends HttpServlet {
+@WebServlet("/study/studyView")
+public class StudyViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LectorChangeServlet() {
+    public StudyViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,28 +32,26 @@ public class LectorChangeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int pNo=Integer.parseInt(request.getParameter("pNo"));
-		int cNo;
-		try {
-			cNo=Integer.parseInt(request.getParameter("cNo"));
-		}catch(NumberFormatException e) {
-			cNo=-1;
-		}
-		Lector l=null;
-		LectorWatch lw=null;
-		if(cNo==-1) {
-			l=new LectorService().selectLector(pNo);
+		int no=Integer.parseInt(request.getParameter("no"));
+		Study s=new StudyService().selectStudy(no);
+		System.out.println(no);
+		System.out.println(s);
+		String msg="";
+		String loc="";
+		
+		if(s==null) {
+			request.setAttribute("msg", "조회할 강좌가 없습니다.");
+			request.setAttribute("loc", "study/studyList");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			
 		}else {
-			lw=new LectorService().selectLectorWatchView(cNo);
+			request.setAttribute("study", s);
+			request.getRequestDispatcher("/views/study/studyView.jsp").forward(request, response);
 		}
-		System.out.println(l);
-		System.out.println(lw);
-		String src=l!=null?l.getLectorOriginalVideo():lw.getWatchOriginalVideo();
-		//response.setContentType("application/json;charset=UTF-8");
-		response.getWriter().write(src);
-	
-	
 	}
+		
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

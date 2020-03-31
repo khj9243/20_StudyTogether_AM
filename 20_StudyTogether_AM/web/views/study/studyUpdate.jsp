@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 <%@ include file="/views/common/header.jsp"%>
+
  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/lecStuOpen.css" type="text/css"/>
 <form style="margin:0 auto;" id="frmOpen" action="<%=request.getContextPath()%>/study/studyOpenEnd" method="post" enctype="multipart/form-data">
  <br>
@@ -157,19 +157,5 @@
                  </div>
 
  </form>
- <script>
-  function cancelChk(){
-      if (confirm("정말 취소하시겠습니까??") == true){    //확인
-            location.replace("<%=request.getContextPath()%>/study/studyList");
-        }else{   //취소
-           return false;
-        }
-    }
-  //모집 날짜, 오늘 날짜 이후로만 선택 가능
-  $(function() {
-	  $( "#endPeriod" ).datepicker({ minDate: 0});
-	  }); // 안됨...
- </script>
-
 
 <%@ include file="/views/common/footer.jsp"%>
