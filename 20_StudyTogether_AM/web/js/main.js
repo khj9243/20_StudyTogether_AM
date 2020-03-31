@@ -310,3 +310,14 @@ function check_class_toggle(){
 	    }
 	}
 }
+
+/*payment form button toggle*/
+$(document).on('click','.btn_toggle',function(){
+	if($(this).hasClass('on')){
+		$(this).removeClass('on');
+		$('.payInfo').hide(100);
+	}else{
+		$(this).addClass('on');
+		$('.payInfo').show(100);
+	}
+})

@@ -2,35 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!-- header페이지 불러오기 -->
 <%@ include file="/views/common/header.jsp"%>
-<style>
-	.btn_toggle {
-		display: inline-block;
-		width: 43px;
-		height: 43px;
-		font-size: 0;
-		color: transparent;
-		border: none;
-		background: url('<%=request.getContextPath()%>/images/btn_toggle2.gif') no-repeat 10px 16px;
-		transition: 0.3s;
-	}
-	.btn_toggle.on {
-		background-position: 10px -14px;
-	}
-	th[name='order_name']{
-		background-color:#EAEAEA;
-	}
-</style>
-<script>
-	$(document).on('click','.btn_toggle',function(){
-		if($(this).hasClass('on')){
-			$(this).removeClass('on');
-			$('.payInfo').hide(100);
-		}else{
-			$(this).addClass('on');
-			$('.payInfo').show(100);
-		}
-	})
-</script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/paymentForm.css">
 <div class="container">
 	<form action="<%=request.getContextPath()%>/payment/paymentTest" method="post">
 		<div class="row">
@@ -74,29 +46,31 @@
 				<tbody>
 					<tr>
 						<td id="prodImg0" class="img_cell ver_top">
-							<a href="javascript:;" class="book_img" onclick="toView('blank', '9788990247674', 'KOR');"> 
+							<a href="javascript:;" class="" onclick=""> 
 								<img src="http://placehold.it/100x100">
 							</a>
 						</td>
 						<td id="prodName0" class="align_left ver_top">
 							<div class="order_name">
-								<a href="javascript:;" onclick="#">
+								<a href="javascript:;">
 									<span>JSP 강좌</span>
+									<input type="hidden" name="" value="">
 								</a>
 							</div>
 						</td>
 						<td>
 							<strong>25,200</strong>원 
 							<div>25,200원</div>
+							<input type="hidden" name="" value="">
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<div class="row d-flex justify-content-center ">
+			<button class="btn btn-light w-50" type="button">결제하기</button>
+			<button class="btn btn-light w-50" type="button" onclick="history.go(-1);">취소하기</button>
+		</div>
 	</form>
-	<div class="row d-flex justify-content-center ">
-		<button class="btn btn-light w-50" type="button">결제하기</button>
-		<button class="btn btn-light w-50" type="button" onclick="history.go(-1);">취소하기</button>
-	</div>
 </div>
 <%@ include file="/views/common/footer.jsp"%>
