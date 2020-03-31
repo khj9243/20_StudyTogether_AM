@@ -1,7 +1,6 @@
 package com.kh.lector.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,18 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.lector.model.service.LectorService;
+import com.kh.lector.model.vo.Lector;
 
 /**
- * Servlet implementation class LectorDeleteServlet
+ * Servlet implementation class ChannelOpenServlet
  */
-@WebServlet("/lector/lectorDelete")
-public class LectorDeleteServlet extends HttpServlet {
+@WebServlet("/lector/lectorChannelOpen")
+public class ChannelOpenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LectorDeleteServlet() {
+    public ChannelOpenServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,25 +29,15 @@ public class LectorDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no=Integer.parseInt(request.getParameter("no"));
-		int result=new LectorService().deleteLector(no);
-
-		String msg="";
-		String loc="";
 		
-		if(result>0) {
-			msg="삭제 완료";
-			loc="/lector/lectorList";
-			
-		}
-		else {
-			msg="삭제 실패";
-			loc="/lector/lectorWatch";
-			
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		int no=Integer.parseInt(request.getParameter("no"));
+		Lector l=new LectorService().selectLector(no);
+		
+		request.setAttribute("lector", l);
+		System.out.println(l);
+		
+		//화면 전환용 서블릿
+		request.getRequestDispatcher("/views/lector/channelOpen.jsp").forward(request, response);
 		
 	}
 
@@ -55,6 +45,7 @@ public class LectorDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.kh.lector.model.dao.LectorDao;
 import com.kh.lector.model.vo.Lector;
+import com.kh.lector.model.vo.LectorChannel;
 
 public class LectorService {
 
@@ -34,6 +35,7 @@ public class LectorService {
 		return list;
 	}
 
+	
 	public int lectorCount() {
 		Connection conn=getConnection();
 		int result=dao.lectorCount(conn);
@@ -52,7 +54,6 @@ public class LectorService {
 
 	public int deleteLector(int no) {
 		Connection conn=getConnection();
-		
 		int result=dao.deleteLector(conn,no);
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -68,6 +69,38 @@ public class LectorService {
 		close(conn);
 		return result;
 	}
+////////////강좌 채널 내 강의 추가하기
+	public int insertChannelLector(LectorChannel lc) {
+
+		Connection conn=getConnection();
+		int result=dao.insertChannelLector(conn,lc);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+//채널조회
+	public List<LectorChannel> searchChannel(int no) {
+		Connection conn=getConnection();
+		List<LectorChannel> list=dao.searchChannel(conn,no);
+		close(conn);
+		return list;
+	}
+
+	public List<LectorChannel> searchChannel(int no, int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<LectorChannel> list=dao.searchChannel(conn,no,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int channelCount() {
+		Connection conn=getConnection();
+		int result=dao.channelCount(conn);
+		close(conn);
+		return result;
+	}
+	
 
 	
 

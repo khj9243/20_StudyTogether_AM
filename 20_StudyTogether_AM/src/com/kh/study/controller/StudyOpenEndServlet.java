@@ -45,9 +45,9 @@ public class StudyOpenEndServlet extends HttpServlet {
 		String path=getServletContext().getRealPath("/upload/study/");
 		int maxSize=1024*1024*30;
 		MultipartRequest mr=new MultipartRequest(request,path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
-		
-		String title=mr.getParameter("studyName");
+	
 		String writer=mr.getParameter("studyWriter");
+		String title=mr.getParameter("studyName");
 		String area=mr.getParameter("studyArea");
 		String category=mr.getParameter("studyCategory");
 		int maxMember=Integer.parseInt(mr.getParameter("maxMember"));
@@ -57,6 +57,18 @@ public class StudyOpenEndServlet extends HttpServlet {
 		String intro=mr.getParameter("intro1");
 		String oriImg=mr.getOriginalFileName("thumbnail");
 		String reImg=mr.getFilesystemName("thumbnail");
+		
+		System.out.println("개설자:"+writer);
+		System.out.println("스터디명:"+title);
+		System.out.println("지역:"+area);
+		System.out.println("카테고리:"+category);
+		System.out.println("모집인원:"+maxMember);
+		System.out.println("마감일:"+endDate);
+		System.out.println("가능일:"+days);
+		System.out.println("상세소개:"+intro);
+		System.out.println("파일명:"+oriImg);
+		System.out.println("파일명:"+reImg);
+		
 		Study s=new Study(0,title,writer,category,days,area,intro,maxMember,null,endDate,oriImg,reImg,null,null);
 		
 		int result=new StudyService().insertStudy(s);

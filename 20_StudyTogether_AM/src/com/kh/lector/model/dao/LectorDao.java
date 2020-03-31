@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import com.kh.lector.model.vo.Lector;
+import com.kh.lector.model.vo.LectorChannel;
 
 public class LectorDao {
 
@@ -25,13 +26,8 @@ public class LectorDao {
 			e.printStackTrace();
 		}
 	}
-	
-	
-
-	
 	//강좌조회
 	public List<Lector> searchLector(Connection conn, int cPage, int numPerPage) {
-		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("searchLector");
@@ -65,7 +61,6 @@ public class LectorDao {
 		}
 		return list;
 	}
-	
 
 	//총 로우수 받아오는 메서드
 	public int lectorCount(Connection conn) {
@@ -198,6 +193,131 @@ public class LectorDao {
 		return result;
 	}
 
+
+
+
+	public int insertChannelLector(Connection conn, LectorChannel lc) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertChannelLector");
+		try {
+			pstmt=conn.prepareStatement(sql);
+		//	pstmt.setInt(1,lc.getChannelNo());
+			pstmt.setInt(1, lc.getChannelNoRef());
+			pstmt.setString(2, lc.getChannelTitle());
+			pstmt.setString(3, lc.getChannelWriter());
+			pstmt.setString(4, lc.getChannelDetail());
+			pstmt.setInt(5, lc.getChannelPrice());
+			pstmt.setString(6,lc.getChannelOriginalVideo() );
+			pstmt.setString(7, lc.getChannelRenamedVideo());
+		//	pstmt.setDate(9, lc.getChannelEnrollDate());
+		//	pstmt.setInt(10, lc.getChannelLevel());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<LectorChannel> searchChannel(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("searchLectorChannel");
+		List<LectorChannel> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				LectorChannel lc=new LectorChannel();
+				lc.setChannelNo(rs.getInt("lector_channel_no"));
+				lc.setChannelNoRef(rs.getInt("lector_channel_no_ref"));
+				lc.setChannelTitle(rs.getString("lector_channel_title"));
+				lc.setChannelWriter(rs.getString("lector_channel_writer"));
+				lc.setChannelDetail(rs.getString("lector_channel_detail"));
+				lc.setChannelPrice(rs.getInt("lector_channel_price"));
+				lc.setChannelOriginalVideo(rs.getString("original_lector_channel_video"));
+				lc.setChannelRenamedVideo(rs.getString("renamed_lector_channel_video"));
+				lc.setChannelEnrollDate(rs.getDate("lector_channel_date"));
+				lc.setChannelLevel(rs.getInt("lector_channel_level"));
+				list.add(lc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+
+
+	public List<LectorChannel> searchChannel(Connection conn, int no, int cPage, int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("searchLectorChannelPage");
+		List<LectorChannel> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,no);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+		
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				LectorChannel lc=new LectorChannel();
+				lc.setChannelNo(rs.getInt("lector_channel_no"));
+				lc.setChannelNoRef(rs.getInt("lector_channel_no_ref"));
+				lc.setChannelTitle(rs.getString("lector_channel_title"));
+				lc.setChannelWriter(rs.getString("lector_channel_writer"));
+				lc.setChannelDetail(rs.getString("lector_channel_detail"));
+				lc.setChannelPrice(rs.getInt("lector_channel_price"));
+				lc.setChannelOriginalVideo(rs.getString("original_lector_channel_video"));
+				lc.setChannelRenamedVideo(rs.getString("renamed_lector_channel_video"));
+				lc.setChannelEnrollDate(rs.getDate("lector_channel_date"));
+				lc.setChannelLevel(rs.getInt("lector_channel_level"));
+				lc.setChannel_assign(rs.getString("lector_channel_assign"));
+				list.add(lc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+
+
+	public int channelCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String sql=prop.getProperty("channelCount");//
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);//카운트행
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+	
+		
 
 
 }

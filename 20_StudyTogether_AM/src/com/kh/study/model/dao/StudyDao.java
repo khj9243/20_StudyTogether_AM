@@ -19,7 +19,6 @@ import com.kh.study.model.vo.Study;
 
 public class StudyDao {
 
-	
 	private Properties prop=new Properties();
 	
 	public StudyDao() {
@@ -47,7 +46,8 @@ public class StudyDao {
 			pstmt.setString(7, s.getStudyDetail());
 			pstmt.setInt(8, s.getMaxMember());
 			pstmt.setDate(9, s.getEnrollDate());
-			pstmt.setString(10, s.getEndDate());
+			//System.out.println(s.getEndDate().replaceAll("-", "/"));
+			pstmt.setString(10, s.getEndDate().replaceAll("-", ""));
 			pstmt.setString(11, s.getOriImg());
 			pstmt.setString(12, s.getReImg());
 			pstmt.setString(13, s.getDateAssign());
@@ -60,6 +60,7 @@ public class StudyDao {
 		}
 		return result;
 	}
+	
 
 	public List<Study> searchStudy(Connection conn, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
@@ -99,8 +100,6 @@ public class StudyDao {
 		}
 		return list;
 	}
-	
-	
 
 	public int studyCount(Connection conn) {
 		PreparedStatement pstmt=null;

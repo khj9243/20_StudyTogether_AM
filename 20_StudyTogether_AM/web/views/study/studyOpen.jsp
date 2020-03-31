@@ -166,9 +166,9 @@
         }
     }
   //모집 날짜, 오늘 날짜 이후로만 선택 가능
-  $(function() {
+ /*  $(function() {
 	  $( "#endPeriod" ).datepicker({ minDate: 0});
-	  }); // 안됨...
+	  }); */ // 안됨...
  </script>
 
 
