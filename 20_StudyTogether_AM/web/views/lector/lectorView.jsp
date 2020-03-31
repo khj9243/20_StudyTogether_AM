@@ -42,21 +42,21 @@ background-color:#ffc107;
 	<video src="<%=request.getContextPath() %>/upload/lector/<%=l.getLectorOriginalVideo() %>" id="video" controls width="855px" height="481px"></video>
     <%}%>
  	</div>
+    
     <div id="video-inform">
     <%=l.getLectorDetail() %>
     </div>
+   
     <button type="button" class="basket" onclick="apply();">수강신청</button>
   </div>
-
-
+  
+  
 <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
-
-
 <div class="container">
 <%if(!clist.isEmpty()){ %>
   <div class="list-group">
     <%for(LectorChannel lc:clist){ %>
-    <a href="#" class="list-group-item list-group-item-action"><%=lc.getChannelTitle() %></a>
+    <a href="<%=request.getContextPath() %>/lector/channelView?cNo=<%=l.getLectorNo() %>" class="list-group-item list-group-item-action"><%=lc.getChannelTitle() %></a>
 	<%}
 	}%>
   </div>
