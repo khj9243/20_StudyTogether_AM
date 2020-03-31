@@ -106,7 +106,7 @@
 		<h3>검색된 강좌가 없습니다.</h3>
 <%}else{ %>
 	<%for(Study s:list){ %>
-  	<a href="<%=request.getContextPath()%>/study/studyWatch?no=<%=s.getStudyNo()%>">
+  	<a href="<%=request.getContextPath()%>/study/studyView?no=<%=s.getStudyNo()%>">
     	<div class="list_detail">
       		<h4><%=s.getStudyCategory() %></h4>
      <%if(s.getOriImg()!=null){ %>

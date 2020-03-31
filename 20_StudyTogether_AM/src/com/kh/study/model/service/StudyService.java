@@ -40,4 +40,13 @@ public class StudyService {
 		return result;
 	}
 
+	public Study selectStudy(int no) {
+
+		Connection conn=getConnection();
+		Study s=dao.selectStudy(conn,no);
+		close(conn);
+		return s;
+		
+	}
+
 }

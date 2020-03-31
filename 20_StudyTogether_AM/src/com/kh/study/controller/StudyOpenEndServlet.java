@@ -68,7 +68,7 @@ public class StudyOpenEndServlet extends HttpServlet {
 
 		if(result>0) {
 			msg="등록되었습니다.";
-			loc="/";
+			loc="/study/studyList";
 		}else {
 			msg="등록을 실패하였습니다.";
 			loc="/study/studyOpen";//슬러시 꼭

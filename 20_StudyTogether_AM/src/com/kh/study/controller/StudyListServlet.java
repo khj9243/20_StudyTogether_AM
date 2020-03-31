@@ -37,11 +37,9 @@ public class StudyListServlet extends HttpServlet {
 		
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
-			
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-
 		/*	1.	cPage : 현재 페이지를 의미(1페이지를 보고있는지 2페이지를 보고있는지)
 			2.	numPerPage : 한 개 페이지에 출력될 데이터 수
 			3.	totalData : 총 데이터수(총 로우수)

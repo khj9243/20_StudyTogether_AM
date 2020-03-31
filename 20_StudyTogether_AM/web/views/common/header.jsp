@@ -21,49 +21,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- CSS -->
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css" type="text/css"/>
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css" type="text/css"/>
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/section.css" type="text/css"/>
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/lookPassword.css" type="text/css"/>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-   <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
-   
-   <!-- JavaScript -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	    
+	    <!-- CSS -->
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css" type="text/css"/>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/footer.css" type="text/css"/>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/section.css" type="text/css"/>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/lookPassword.css" type="text/css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+	
+	<!-- JavaScript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/main.js"></script>
-   
-   <title>Study Together</title>
+	   
+	<title>Study Together</title>
 </head>
 <body>
-<div class=main>
+	<div class=main>
 <% if(loginMember==null){ %>
-    <a id=mainlogo href="<%=request.getContextPath() %>">
-		<img src="<%=request.getContextPath() %>/images/logo.png" width="180px" height="100px">
-	</a>
-    <button class="main2" type="button" onclick="location.href='<%=request.getContextPath() %>/faq/faqList'">고객센터</button>
-	<button class="main2" type="button" data-target="#loginModalCenter" data-toggle="modal">회원가입</button>
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="main2">로그인</button>
-   <%}else{ %>
-   <a id=mainlogo href="<%=request.getContextPath() %>">
-		<img src="<%=request.getContextPath() %>/images/logo.png" width="180px" height="100px">
-	</a>
+	    <a id=mainlogo href="<%=request.getContextPath() %>">
+			<img src="<%=request.getContextPath() %>/images/logo.png" width="180px" height="100px">
+		</a>
+	    <button class="main2" type="button" onclick="location.href='<%=request.getContextPath() %>/faq/faqList'">고객센터</button>
+		<button class="main2" type="button" data-target="#loginModalCenter" data-toggle="modal">회원가입</button>
+	    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="main2">로그인</button>
+	   <%}else{ %>
+	   <a id=mainlogo href="<%=request.getContextPath() %>">
+			<img src="<%=request.getContextPath() %>/images/logo.png" width="180px" height="100px">
+		</a>
       <button class="main2" type="button" onclick="location.href='<%=request.getContextPath() %>/faq/faqList'">고객센터</button>
       <%if(loginMember!=null && loginMember.getUserId().equals("admin")){ %>
-         <button onclick="location.href='<%=request.getContextPath()%>/admin/adminPage'" class="main2">관리페이지</button>                                                                              
+		<button onclick="location.href='<%=request.getContextPath()%>/admin/adminPage'" class="main2">관리페이지</button>                                                                              
       <%} %>
-         <button onclick="location.href='<%=request.getContextPath()%>/member/memberView'" class="main2">내정보보기</button>
+		<button onclick="location.href='<%=request.getContextPath()%>/member/memberView'" class="main2">내정보보기</button>
          
-          <button onclick="location.href='<%=request.getContextPath()%>/cart/cartView'" class="main2">장바구니</button>                                                                             
+		<button onclick="location.href='<%=request.getContextPath()%>/cart/cartView'" class="main2">장바구니</button>                                                                             
      
-      <button onclick="location.replace('<%=request.getContextPath()%>/logout.do')" class="main2">로그아웃</button>
+		<button onclick="location.replace('<%=request.getContextPath()%>/logout.do')" class="main2">로그아웃</button>
    <%} %>
   </div>
   
