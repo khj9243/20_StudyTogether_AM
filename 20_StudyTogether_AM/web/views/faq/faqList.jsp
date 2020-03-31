@@ -21,6 +21,24 @@
  			<button type="button" id="btn-faq-write" onclick="fn_faqWrite();">FAQ 작성</button>
 <%-- 		<% } %> --%>
 
+
+
+
+		<div id="category-container">
+			<button type="button" id="btn-faq-category" onclick="fn_all();">전체보기</button>
+			<button type="button" id="btn-faq-category" onclick="fn_member();">회 원</button>
+			<button type="button" id="btn-faq-category" onclick="fn_registStudy();">스터디 개설</button>
+			<button type="button" id="btn-faq-category" onclick="fn_payment();">결 제</button>
+			<button type="button" id="btn-faq-category" onclick="fn_etc();">기 타</button>
+		</div>
+		<div id="tableContainer"></div>
+
+
+
+
+
+
+
 	<table id="tbl-faq">
 		<tr>
 			<th>카테고리</th>
