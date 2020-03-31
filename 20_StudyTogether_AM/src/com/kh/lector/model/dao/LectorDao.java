@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import com.kh.lector.model.vo.Lector;
+import com.kh.lector.model.vo.LectorChannel;
 
 public class LectorDao {
 
@@ -189,6 +190,34 @@ public class LectorDao {
 //			pstmt.setString(7, l.getLectorOriginalVideo());
 //			pstmt.setString(8, l.getLectorRenamedVideo());
 			pstmt.setInt(6, l.getLectorNo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+	public int insertChannelLector(Connection conn, LectorChannel lc) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertChannelLector");
+		try {
+			pstmt=conn.prepareStatement(sql);
+		//	pstmt.setInt(1,lc.getChannelNo());
+			pstmt.setInt(1, lc.getChannelNoRef());
+			pstmt.setString(2, lc.getChannelTitle());
+			pstmt.setString(3, lc.getChannelWriter());
+			pstmt.setString(4, lc.getChannelDetail());
+			pstmt.setInt(5, lc.getChannelPrice());
+			pstmt.setString(6,lc.getChannelOriginalVideo() );
+			pstmt.setString(7, lc.getChannelRenamedVideo());
+		//	pstmt.setDate(9, lc.getChannelEnrollDate());
+		//	pstmt.setInt(10, lc.getChannelLevel());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

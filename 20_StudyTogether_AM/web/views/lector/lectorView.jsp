@@ -17,7 +17,7 @@
 <section>
  <div class="container" >
     <%-- <a href="<%=request.getContextPath() %>/lectorWatch/lectorInsert" class="btn btn-info" role="button">강좌 추가</a> --%>
-    <a href="<%=request.getContextPath()%>/lector/lectorViewOpen?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 추가</a>
+    <a href="<%=request.getContextPath()%>/lector/lectorChannelOpen?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 추가</a>
     <a href="<%=request.getContextPath()%>/lector/lectorUpdate?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 수정</a>
     <a href="<%=request.getContextPath() %>/lector/lectorDelete?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 삭제</a><!--관리자만 삭제  -->
   </div>
@@ -50,10 +50,24 @@ background-color:#ffc107;
     <button type="button" class="basket" onclick="apply();">수강신청</button>
   </div>
 
-<%-- <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
- --%>
-<!--강좌 추가한것  -->
-<%-- <div class="container">
+
+<p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
+<div class="container">
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action">1강.오리엔테이션 및 강의소개</a>
+    <a href="#" class="list-group-item list-group-item-action">2강.문장의 형식</a>
+    <a href="#" class="list-group-item list-group-item-action">3강.문장의 형식-2</a>
+  </div>
+</div>
+<div class="page">
+<ul class="pagination">
+  <li class="page-item"><a class="page-link" href="#">이전</a></li>
+  <li class="page-item"><a class="page-link" href="#">1</a></li>
+  <li class="page-item"><a class="page-link" href="#">다음</a></li>
+</ul>
+<%-- </div>
+ <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
+<div class="container">
   <div class="list-group">
     <a href="javascript:void(0)" onclick="changeLector('<%=l.getLectorNo()%>')" class="list-group-item list-group-item-action"><%=l.getLectorTitle() %></a>
   	<%if(list!=null&&!list.isEmpty()){
@@ -61,7 +75,7 @@ background-color:#ffc107;
   	<a href="javascript:void(0)" onclick="changeLector('<%=l.getLectorNo()%>','<%=lw.getWatchNo() %>')" class="list-group-item list-group-item-action"><%=lw.getWatchTitle()%></a>
 	 <%}
 	}%>
-  </div>
+  </div> --%>
 </div> --%>
 
 
