@@ -70,7 +70,6 @@ public class LectorService {
 		return result;
 	}
 ////////////강좌 채널 내 강의 추가하기
-
 	public int insertChannelLector(LectorChannel lc) {
 
 		Connection conn=getConnection();

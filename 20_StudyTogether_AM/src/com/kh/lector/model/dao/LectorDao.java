@@ -26,10 +26,6 @@ public class LectorDao {
 			e.printStackTrace();
 		}
 	}
-	
-	
-
-	
 	//강좌조회
 	public List<Lector> searchLector(Connection conn, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
@@ -65,7 +61,6 @@ public class LectorDao {
 		}
 		return list;
 	}
-	
 
 	//총 로우수 받아오는 메서드
 	public int lectorCount(Connection conn) {
