@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PaymentServlet
+ * Servlet implementation class PaymentFormServlet
  */
-@WebServlet("/payment/paymentTest")
-public class PaymentServlet extends HttpServlet {
+@WebServlet("/payment/paymentForm")
+public class PaymentFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentServlet() {
+    public PaymentFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/payment/paymentTest.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/payment/paymentForm.jsp").forward(request, response);
 	}
 
 	/**
