@@ -31,10 +31,10 @@
             pg : 'kakaopay',
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
-    	    name : '주문명:JSP 강좌',
-    	    amount : <%=totalPrice%>,
-    	    buyer_email : '<%=email%>',
-    	    buyer_name : '<%=name%>',
+    	    name : '주문명:JSP 강좌', 
+    	    amount : <%=totalPrice%>, 
+    	    buyer_email : '<%=email%>', 
+    	    buyer_name : '<%=name%>', 
     	    buyer_tel : '<%=phone%>',
     	    buyer_addr : '<%=address%>',
             buyer_postcode : '123-456',
@@ -73,9 +73,7 @@
 	            alert(msg);
             }
         });
-        
     });
 </script>
-
 </body>
 </html>
