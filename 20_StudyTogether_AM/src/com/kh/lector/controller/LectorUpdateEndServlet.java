@@ -77,7 +77,7 @@ public class LectorUpdateEndServlet extends HttpServlet {
 		int result=new LectorService().updateLector(l);
 		
 		String msg="";
-		String loc="/lector/lectorWatch?no="+mr.getParameter("no");
+		String loc="/lector/lectorView?no="+mr.getParameter("no");
 		//jsp 안받아도 들어가나?
 		
 		if(result>0) {

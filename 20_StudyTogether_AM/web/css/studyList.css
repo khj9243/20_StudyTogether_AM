@@ -57,10 +57,8 @@ select{
     
 .make img:hover{
         transform:perspective(400px) rotateZ(30deg);
-
     }
-  
-    .make a{
+.make a{
     font-size: 20px;
     text-decoration: none;
     color:black;
@@ -70,12 +68,7 @@ select{
     margin-left: 1000px;
   }
  #lectorTitle{
- 	text-align:center;
-     padding-top: 15px;
-     font-weight: bolder;
-     font-size: 18px;
- }
- 
+ 	text-align:center; 
  .pagination{
  margin-left:600px;
  }

@@ -11,9 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import com.kh.lector.model.vo.Lector;
-import com.kh.lectorWatch.model.vo.LectorWatch;
 
 public class LectorDao {
 
@@ -68,7 +66,6 @@ public class LectorDao {
 		return list;
 	}
 	
-	
 
 	//총 로우수 받아오는 메서드
 	public int lectorCount(Connection conn) {
@@ -91,7 +88,7 @@ public class LectorDao {
 
 
 
-
+	//no이용해서 특정강좌select
 	public Lector selectLector(Connection conn, int no) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -125,45 +122,6 @@ public class LectorDao {
 		return l;
 	}
 
-
-
-//카테고리검색
-//	public List<Lector> searchLector(Connection conn, String type) {
-//
-//		Statement stmt=null;
-//		ResultSet rs=null;
-//		String sql="SELECT * FROM LECTOR WHERE "+type+"";
-//		List<Lector> list=new ArrayList();
-//		try {
-//			stmt=conn.createStatement();
-//			rs=stmt.executeQuery(sql);
-//			
-//			while(rs.next()) {
-//				Lector l=new Lector();
-//				l.setLectorNo(rs.getInt("lector_no"));
-//				l.setLectorTitle(rs.getString("lector_title"));
-//				l.setLectorWriter(rs.getString("lector_writer"));
-//				l.setLectorCategory(rs.getString("lector_category"));
-//				l.setLectorDetail(rs.getString("lector_detail"));
-//				l.setLectorPrice(rs.getInt("lector_price"));
-//		//		l.setLectorImg(rs.getString("lector_img"));
-//				l.setLectorVideo(rs.getString("lector_video"));
-//				l.setLectorDate(rs.getDate("lector_date"));
-//				l.setLectorReadCount(rs.getInt("lector_readcount"));
-//				l.setLectorAssign(rs.getString("lector_assign"));
-//				list.add(l);
-//			}
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(stmt);
-//		}
-//		return list;
-//	}
-
-
-
 //강좌개설
 	public int insertLector(Connection conn, Lector l) {
 
@@ -192,7 +150,7 @@ public class LectorDao {
 
 
 
-
+//강좌 삭제
 	public int deleteLector(Connection conn, int no) {
 
 		PreparedStatement pstmt=null;
@@ -214,7 +172,7 @@ public class LectorDao {
 
 
 
-
+//강좌수정-이미등록한 강좌는 수정못하게했음
 	public int updateLector(Connection conn, Lector l) {
 		
 		PreparedStatement pstmt=null;
@@ -241,94 +199,5 @@ public class LectorDao {
 	}
 
 
-
-
-	public int insertLector(Connection conn, LectorWatch lw) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("insertLectorWatch");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,lw.getRefLectorNo());
-			pstmt.setString(2,lw.getWatchTitle());
-			pstmt.setString(3, lw.getWatchWriter());
-			pstmt.setString(4,lw.getWatchDetail());
-			pstmt.setInt(5, lw.getWatchPrice());
-			pstmt.setString(6, lw.getWatchOriginalVideo());
-			pstmt.setString(7, lw.getWatchRenamedVideo());
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
-
-
-
-//lectorWatch조회
-	public List<LectorWatch> selectLectorWatch(Connection conn, int no) {
-		
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<LectorWatch> list=new ArrayList();
-		String sql=prop.getProperty("selectLectorWatch");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				LectorWatch lw=new LectorWatch();
-				lw.setWatchNo(rs.getInt("lector_watch_no"));
-				lw.setRefLectorNo(rs.getInt("lector_watch_no_ref"));
-				lw.setWatchTitle(rs.getString("lector_watch_title"));
-				lw.setWatchWriter(rs.getString("lector_watch_writer"));
-				lw.setWatchDetail(rs.getString("lector_watch_detail"));
-				lw.setWatchPrice(rs.getInt("lector_watch_price"));
-				lw.setWatchOriginalVideo(rs.getString("original_lector_watch_video"));
-				lw.setWatchRenamedVideo(rs.getString("renamed_lector_watch_video"));
-				lw.setWatchDate(rs.getDate("lector_watch_date"));
-				list.add(lw);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return list;
-	}
-
-	public LectorWatch selectLectorWatchView(Connection conn, int no) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql=prop.getProperty("selectLectorWatchView");
-		LectorWatch lw=null;
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
-			rs=pstmt.executeQuery();
-		
-			if(rs.next())
-			lw=new LectorWatch();
-			lw.setWatchNo(rs.getInt("lector_watch_no"));
-			lw.setRefLectorNo(rs.getInt("lector_watch_no_ref"));
-			lw.setWatchTitle(rs.getString("lector_watch_title"));
-			lw.setWatchWriter(rs.getString("lector_watch_writer"));
-			lw.setWatchDetail(rs.getString("lector_watch_detail"));
-			lw.setWatchPrice(rs.getInt("lector_watch_price"));
-			lw.setWatchOriginalVideo(rs.getString("original_lector_watch_video"));
-			lw.setWatchRenamedVideo(rs.getString("renamed_lector_watch_video"));
-			lw.setWatchDate(rs.getDate("lector_watch_date"));
-		
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return lw;
-	}
 
 }

@@ -17,7 +17,6 @@ private MemberDao dao = new MemberDao();
 	public Member selectId(String id, String pw) {
 		Connection conn=getConnection();
 		Member m = dao.selectId(conn,id,pw);
-		System.out.println("돌아옴");
 		close(conn);
 		return m;
 	}

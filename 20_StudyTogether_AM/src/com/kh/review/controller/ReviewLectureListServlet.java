@@ -51,9 +51,9 @@ public class ReviewLectureListServlet extends HttpServlet {
 		String pageBar="";
 		
 		if(pageNo==1) {
-			pageBar+="<li class='page-item'><a class='page-link'>[이전]</a></li>";
+			pageBar+="<li class='page-item'><a class='page-link'>이전</a></li>";
 		}else {
-			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/review/reviewLecture/reviewLectureList?cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/review/reviewLecture/reviewLectureList?cPage="+(pageNo-1)+"'>이전</a>";
 		}
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(pageNo ==cPage) {
@@ -65,9 +65,9 @@ public class ReviewLectureListServlet extends HttpServlet {
 		}
 		//다음
 		if(pageNo>totalPage) {
-			pageBar+="<li class='page-item'><a class='page-link'>[다음]</a></li>";
+			pageBar+="<li class='page-item'><a class='page-link'>다음</a></li>";
 		}else {
-			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/review/reviewLecture/reviewLectureList?cPage="+pageNo+"'>[다음]</a>";
+			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/review/reviewLecture/reviewLectureList?cPage="+pageNo+"'>다음</a>";
 		}
 		List<ReviewLecture> list=new ReviewLectureService().selectReviewLecture(cPage,numPerPage);
 		

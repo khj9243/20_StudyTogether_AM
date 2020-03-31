@@ -36,7 +36,6 @@ public class StudyDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql=prop.getProperty("insertStudy");
-		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1,s.getStudyNo());
@@ -119,5 +118,40 @@ public class StudyDao {
 			close(pstmt);
 		}
 		return result;
+	}
+//studyView 스터디 조회메서드
+	public Study selectStudy(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql=prop.getProperty("selectStudy");
+		Study s=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+		if(rs.next())
+			s=new Study();
+			s.setStudyNo(rs.getInt("STUDY_NO"));
+			s.setStudyName(rs.getString("STUDY_NAME"));
+			s.setStudyWriter(rs.getString("STUDY_WRITER"));
+			s.setStudyCategory(rs.getString("STUDY_CATEGORY"));
+			s.setStudyPossibleDay(rs.getString("STUDY_POSSIBLE_DAY"));
+			s.setStudyArea(rs.getString("STUDY_AREA"));
+			s.setStudyDetail(rs.getString("STUDY_DETAIL"));
+			s.setMaxMember(rs.getInt("STUDY_MAX_MEMBER"));
+			s.setEnrollDate(rs.getDate("STUDY_DATE"));
+			s.setEndDate(rs.getString("STUDY_END_DATE"));
+			s.setOriImg(rs.getString("STUDY_ORIGINAL_IMG"));
+			s.setReImg(rs.getString("STUDY_RENAMED_IMG"));
+			s.setDateAssign(rs.getString("STUDY_DATE_ASSIGN"));
+			s.setMemberAssign(rs.getString("STUDY_MEMBER_ASSIGN"));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return s;
 	}
 }

@@ -7,6 +7,7 @@
 참여한 강좌 리스트에는 로그인 되어있는 강좌만 표시 되도롣!!!! -->
 
 <form style="margin:0 auto;">
+<br>
 <h2 id="revWTitle">강좌 후기작성</h2>
    <table class="revWrite">
       <tr>

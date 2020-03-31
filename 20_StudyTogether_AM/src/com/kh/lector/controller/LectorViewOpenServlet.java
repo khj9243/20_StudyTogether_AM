@@ -1,8 +1,8 @@
 package com.kh.lector.controller;
 
 import java.io.IOException;
-import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.lector.model.service.LectorService;
 import com.kh.lector.model.vo.Lector;
-import com.kh.lectorWatch.model.vo.LectorWatch;
 
 /**
- * Servlet implementation class LectorWatch
+ * Servlet implementation class LectorInsertServlet
  */
-@WebServlet("/lector/lectorWatch")
-public class LectorWatchServlet extends HttpServlet {
+@WebServlet("/lector/lectorViewOpen")
+public class LectorViewOpenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LectorWatchServlet() {
+    public LectorViewOpenServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +31,15 @@ public class LectorWatchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int no=Integer.parseInt(request.getParameter("no"));
-
+		System.out.println(no);
 		Lector l=new LectorService().selectLector(no);
-		//lectorWatch조회
-		List<LectorWatch> lwList=new LectorService().selectLectorWatch(no);
 		
-		
-		String msg="";
-		String loc="";
-		
-		if(l==null) {
-			request.setAttribute("msg", "조회할 강좌가 없습니다.");
-			request.setAttribute("loc", "lector/lectorList");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-			
-		}else {
-			request.setAttribute("lector", l);
-			request.setAttribute("lwList", lwList);
-			request.getRequestDispatcher("/views/lector/lectorWatch.jsp").forward(request, response);
-		}
+		request.setAttribute("lector", l);
+		System.out.println(l);
+		//화면 전환용 서블릿
+		request.getRequestDispatcher("/views/lector/lectorViewOpen.jsp").forward(request, response);
+	
 	}
 
 	/**

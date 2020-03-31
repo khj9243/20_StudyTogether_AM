@@ -86,10 +86,10 @@
       <button onclick="loginCheck();" class="login-button" type="submit">Login</button>
 
       <label>
-        <input type="checkbox" id="store">아이디 저장
+        <input type="checkbox" id="store" name="saveId">아이디 저장
       </label>
       <label>
-      <input type="checkbox" checked="checked" name="remember"> 로그인유지
+      <input type="checkbox" checked="checked" name="keepId"> 로그인유지
     </label>
     </div>
     

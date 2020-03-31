@@ -44,18 +44,11 @@ public class ReviewStudyWriteEndServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	
-		String path=getServletContext().getRealPath("/upload/review");
-		System.out.println("경로 : "+ path);
-		
-		int maxSize = 1024*1024*10;//10MB
-		//3.cos에서 지원하는 MultipartRequest객체를 생성
-		//MultipartRequest(HttpServletRequest,저장경로,파일저장최대크기,문자열인코딩값,파일rename정책)
-		MultipartRequest mr = new MultipartRequest(request,path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
-		String writer = mr.getParameter("writer");
-		String study = mr.getParameter("allStudy");
-		String categoey = mr.getParameter("field");
-		int star = Integer.parseInt(mr.getParameter("star"));
-		String content = mr.getParameter("content");
+		String writer = request.getParameter("writer");
+		String study = request.getParameter("allStudy");
+		String categoey = request.getParameter("field");
+		int star = Integer.parseInt(request.getParameter("star"));
+		String content = request.getParameter("content");
 
 		ReviewStudy revS = new ReviewStudy(0,writer,study,categoey,content,star,null);
 		

@@ -7,17 +7,14 @@
 
 <%
 	List<Lector> list=(List)request.getAttribute("list");
-	
 	String type=request.getParameter("searchType");
 	String keyword=request.getParameter("searchKeyword");
  	int cPage=(int)request.getAttribute("cPage");
-
 %>
 <section>
   <div class="make">
     <a href="<%=request.getContextPath()%>/lector/lectorOpen"><img src="<%=request.getContextPath() %>/images/owl.JPG" width="100px" height="auto" ><br><p>강좌 개설하기</p></a>
   </div>
-  
   	<div id=title>강좌 스터디 찾기 </div>
 	<div class="main_list">
 	 <!-- 상단 제목 -->
@@ -53,23 +50,21 @@
   <!-- 리스트 -->
 </div>
 </div>
- <%if(list.isEmpty()){ %>
-<div class="list_start">
-	<h3>검색된 강좌가 없습니다.</h3>
+<%if(list.isEmpty()){ %>
+	<div class="list_start">
+		<h3>검색된 강좌가 없습니다.</h3>
 <%}else{ %>
 	<%for(Lector lector:list){ %>
-  <a href="<%=request.getContextPath()%>/lector/lectorWatch?no=<%=lector.getLectorNo()%>">
-  
+  		<a href="<%=request.getContextPath()%>/lector/lectorView?no=<%=lector.getLectorNo()%>">
     <div class="list_detail">
       <h4><%=lector.getLectorCategory() %></h4>
       <%if(lector.getLectorOriginalImg()!=null){ %>
-      <div>
-      <!-- 리네임된 파일업로드  -->
+     <div>
+     <!-- 리네임된 파일업로드  -->
         <img src="<%=request.getContextPath() %>/upload/lector/<%=lector.getLectorOriginalImg() %>" class="" width="200px" height="150px">
-      </div>
+     </div>
       <%} %>
       <div id="lectorTitle"><%=lector.getLectorTitle() %><br/><%=lector.getLectorPrice() %>원</div>
-     
     </div>
   </a>
   <%}
@@ -78,7 +73,6 @@
 	 <ul class="pagination">
 		<%=request.getAttribute("pageBar") %>
 	</ul> 
-
 </section>
 	
 <script>

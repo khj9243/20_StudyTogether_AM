@@ -57,7 +57,6 @@ public class StudyOpenEndServlet extends HttpServlet {
 		String intro=mr.getParameter("intro1");
 		String oriImg=mr.getOriginalFileName("thumbnail");
 		String reImg=mr.getFilesystemName("thumbnail");
-		
 		Study s=new Study(0,title,writer,category,days,area,intro,maxMember,null,endDate,oriImg,reImg,null,null);
 		
 		int result=new StudyService().insertStudy(s);
@@ -69,7 +68,7 @@ public class StudyOpenEndServlet extends HttpServlet {
 
 		if(result>0) {
 			msg="등록되었습니다.";
-			loc="/";
+			loc="/study/studyList";
 		}else {
 			msg="등록을 실패하였습니다.";
 			loc="/study/studyOpen";//슬러시 꼭

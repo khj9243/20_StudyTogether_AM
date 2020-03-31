@@ -38,4 +38,11 @@ public class ReviewStudyService {
 		return result;
 	}
 
+	public ReviewStudy searchReviewStudy(int no) {
+		Connection conn = getConnection();
+		ReviewStudy revS = dao.searchReviewStudy(conn,no);
+		close(conn);
+		return revS;
+	}
+
 }
