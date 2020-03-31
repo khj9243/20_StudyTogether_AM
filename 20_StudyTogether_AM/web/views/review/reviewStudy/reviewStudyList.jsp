@@ -35,7 +35,7 @@
          <hr>
             <td><%=revS.getReviewStuCategory()%></td> 
             <td><span style="float:right;"><%=revS.getReviewStuDate() %></span></td>
-             <a href="<%=request.getContextPath()%>/review/reviewView?no=<%=revS.getReviewStuNo()%>">
+             <a href="<%=request.getContextPath()%>/review/reviewStudyView?no=<%=revS.getReviewStuNo()%>">
 	                       <h2><%=revS.getStudyName() %></h2>
 	         </a>
            
