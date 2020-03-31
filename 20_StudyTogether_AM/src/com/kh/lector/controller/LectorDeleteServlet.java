@@ -31,7 +31,6 @@ public class LectorDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no=Integer.parseInt(request.getParameter("no"));
 		int result=new LectorService().deleteLector(no);
-		
 
 		String msg="";
 		String loc="";
