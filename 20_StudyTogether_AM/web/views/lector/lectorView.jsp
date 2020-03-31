@@ -17,7 +17,7 @@
 <section>
  <div class="container" >
 <%--     <a href="<%=request.getContextPath() %>/lectorWatch/lectorInsert" class="btn btn-info" role="button">강좌 추가</a>
- --%>    <a href="<%=request.getContextPath()%>/lector/lectorChannelOpen?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 추가</a>
+ --%> <a href="<%=request.getContextPath()%>/lector/lectorChannelOpen?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 추가</a>
     <a href="<%=request.getContextPath()%>/lector/lectorUpdate?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 수정</a>
     <a href="<%=request.getContextPath() %>/lector/lectorDelete?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 삭제</a><!--관리자만 삭제  -->
   </div>
@@ -28,15 +28,13 @@ background-color:#ffc107;
 
 </style>
 
-
 <!--분기처리해서 강좌개설자&admin에게만 보일수 있는 강좌추가,수정,(삭제는 관리자페이지에서만가능) 버튼  -->
-  
-  <div id="intro">
+<div id="intro">
   <h2><<%=l.getLectorCategory() %>&nbsp;강좌><h2>
   	<p>제목:&nbsp;&nbsp;<%=l.getLectorTitle() %><br>
   	강사:&nbsp;&nbsp;<%=l.getLectorWriter() %><br>
   	금액:&nbsp;&nbsp;<%=l.getLectorPrice() %>&nbsp;&nbsp;원</p>
-  	</div>
+ </div>
   <div class="watch">
     <div class="video">
       <!-- 855*481 -->
