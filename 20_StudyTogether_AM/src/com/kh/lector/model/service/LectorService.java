@@ -54,7 +54,6 @@ public class LectorService {
 
 	public int deleteLector(int no) {
 		Connection conn=getConnection();
-		
 		int result=dao.deleteLector(conn,no);
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -80,6 +79,13 @@ public class LectorService {
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+//채널조회
+	public List<LectorChannel> searchChannel(int no) {
+		Connection conn=getConnection();
+		List<LectorChannel> list=dao.searchChannel(conn,no);
+		close(conn);
+		return list;
 	}
 	
 

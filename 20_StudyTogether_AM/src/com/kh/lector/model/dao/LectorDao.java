@@ -32,7 +32,6 @@ public class LectorDao {
 	
 	//강좌조회
 	public List<Lector> searchLector(Connection conn, int cPage, int numPerPage) {
-		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("searchLector");
@@ -227,6 +226,43 @@ public class LectorDao {
 		return result;
 	}
 
+	public List<LectorChannel> searchChannel(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("searchLectorChannel");
+		List<LectorChannel> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				LectorChannel lc=new LectorChannel();
+				lc.setChannelNo(rs.getInt("lector_channel_no"));
+				lc.setChannelNoRef(rs.getInt("lector_channel_no_ref"));
+				lc.setChannelTitle(rs.getString("lector_channel_title"));
+				lc.setChannelWriter(rs.getString("lector_channel_writer"));
+				lc.setChannelDetail(rs.getString("lector_channel_detail"));
+				lc.setChannelPrice(rs.getInt("lector_channel_price"));
+				lc.setChannelOriginalVideo(rs.getString("original_lector_channel_video"));
+				lc.setChannelRenamedVideo(rs.getString("renamed_lector_channel_video"));
+				lc.setChannelEnrollDate(rs.getDate("lector_channel_date"));
+				lc.setChannelLevel(rs.getInt("lector_channel_level"));
+				list.add(lc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+
+
+	
+		
 
 
 }

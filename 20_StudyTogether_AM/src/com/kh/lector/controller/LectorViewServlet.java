@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.kh.lector.model.service.LectorService;
 import com.kh.lector.model.vo.Lector;
+import com.kh.lector.model.vo.LectorChannel;
 
 /**
  * Servlet implementation class LectorWatch
@@ -34,7 +35,9 @@ public class LectorViewServlet extends HttpServlet {
 		int no=Integer.parseInt(request.getParameter("no"));
 		Lector l=new LectorService().selectLector(no);
 		
-		
+		///lectorView에서 채널  리스트로불러오는 메서드
+		List<LectorChannel> clist=new LectorService().searchChannel(no);
+
 		String msg="";
 		String loc="";
 		
@@ -44,6 +47,7 @@ public class LectorViewServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			
 		}else {
+			request.setAttribute("clist", clist);
 			request.setAttribute("lector", l);
 			request.getRequestDispatcher("/views/lector/lectorView.jsp").forward(request, response);
 		}
