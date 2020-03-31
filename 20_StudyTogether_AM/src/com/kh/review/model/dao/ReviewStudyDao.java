@@ -93,5 +93,32 @@ public class ReviewStudyDao {
 			close(pstmt);
 		}return result;//null이거나 값이 있거나
 	}
+	public ReviewStudy searchReviewStudy(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("searchReviewStudy");
+		ReviewStudy revS=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				revS = new ReviewStudy();
+				revS.setReviewStuNo(rs.getInt("review_stu_no"));
+				revS.setReviewStuWriter(rs.getString("review_stu_writer"));
+				revS.setStudyName(rs.getString("study_name"));
+				revS.setReviewStuCategory(rs.getString("review_stu_category"));
+				revS.setReviewStuContent(rs.getString("review_stu_content"));
+				revS.setReviewStuStar(rs.getInt("review_stu_star"));
+				revS.setReviewStuDate(rs.getDate("review_stu_date"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return revS;//null이거나 값이 있거나
+	}
 
 }
