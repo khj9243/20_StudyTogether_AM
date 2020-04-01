@@ -24,7 +24,4 @@
 	    <div class="col text-center">
 	      <a href="<%=request.getContextPath()%>/admin/adminMemberList" class="text-decoration-none text-reset text-decoration-none text-dark">가입 회원 조회</a>
 	    </div>
-	    <div class="col text-center">
-	      <a href="<%=request.getContextPath()%>/admin/adminManageRefund" class="text-decoration-none text-reset text-decoration-none text-dark">취소/환불 현황</a>
-	    </div>
 	</div>

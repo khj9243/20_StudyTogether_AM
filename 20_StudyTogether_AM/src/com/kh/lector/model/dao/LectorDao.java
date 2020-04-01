@@ -256,14 +256,14 @@ public class LectorDao {
 
 
 
-	public List<LectorChannel> searchChannel(Connection conn, int no, int cPage, int numPerPage) {
+	public List<LectorChannel> searchChannel(Connection conn, int pNo, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("searchLectorChannelPage");
 		List<LectorChannel> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,no);
+			pstmt.setInt(1,pNo);
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 		
@@ -292,9 +292,6 @@ public class LectorDao {
 		return list;
 	}
 
-
-
-
 	public int channelCount(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -311,6 +308,130 @@ public class LectorDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	public List<LectorChannel> searchChannel(Connection conn, int pNo, int cNo, int cPage, int numPerPage) {
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("searchLectorChannelPage2");
+		List<LectorChannel> list=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,pNo);
+			pstmt.setInt(2, cNo);
+			pstmt.setInt(3, (cPage-1)*numPerPage+1);
+			pstmt.setInt(4, cPage*numPerPage);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				LectorChannel lc=new LectorChannel();
+				lc.setChannelNo(rs.getInt("lector_channel_no"));
+				lc.setChannelNoRef(rs.getInt("lector_channel_no_ref"));
+				lc.setChannelTitle(rs.getString("lector_channel_title"));
+				lc.setChannelWriter(rs.getString("lector_channel_writer"));
+				lc.setChannelDetail(rs.getString("lector_channel_detail"));
+				lc.setChannelPrice(rs.getInt("lector_channel_price"));
+				lc.setChannelOriginalVideo(rs.getString("original_lector_channel_video"));
+				lc.setChannelRenamedVideo(rs.getString("renamed_lector_channel_video"));
+				lc.setChannelEnrollDate(rs.getDate("lector_channel_date"));
+				lc.setChannelLevel(rs.getInt("lector_channel_level"));
+				lc.setChannel_assign(rs.getString("lector_channel_assign"));
+				list.add(lc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+		
+	}
+	//lector_channel(자식)의 no만을 이용하여 자식강좌 출력하게 하는 메서드
+	public LectorChannel selectLectorChannel(Connection conn, int cNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("searchLectorChannel");
+		LectorChannel lc=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cNo);
+			rs=pstmt.executeQuery();
+		if(rs.next())	{
+			lc.setChannelNo(rs.getInt("lector_channel_no"));
+			lc.setChannelNoRef(rs.getInt("lector_channel_no_ref"));
+			lc.setChannelTitle(rs.getString("lector_channel_title"));
+			lc.setChannelWriter(rs.getString("lector_channel_writer"));
+			lc.setChannelDetail(rs.getString("lector_channel_detail"));
+			lc.setChannelPrice(rs.getInt("lector_channel_price"));
+			lc.setChannelOriginalVideo(rs.getString("original_lector_channel_video"));
+			lc.setChannelRenamedVideo(rs.getString("renamed_lector_channel_video"));
+			lc.setChannelEnrollDate(rs.getDate("lector_channel_date"));
+			lc.setChannelLevel(rs.getInt("lector_channel_level"));
+			lc.setChannel_assign(rs.getString("lector_channel_assign"));
+		}	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return lc;
+	}
+	
+	//엄마의 pNo와 자식이cNo를 이용하여 특정 자식강좌만 출력하게 하는 메서드
+	public LectorChannel searchChannel(Connection conn, int pNo, int cNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("searchLectorChannel3");
+		LectorChannel lc=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, pNo);
+			pstmt.setInt(2, cNo);
+			rs=pstmt.executeQuery();
+		if(rs.next())	{
+			lc=new LectorChannel();
+			lc.setChannelNo(rs.getInt("lector_channel_no"));
+			lc.setChannelNoRef(rs.getInt("lector_channel_no_ref"));
+			lc.setChannelTitle(rs.getString("lector_channel_title"));
+			lc.setChannelWriter(rs.getString("lector_channel_writer"));
+			lc.setChannelDetail(rs.getString("lector_channel_detail"));
+			lc.setChannelPrice(rs.getInt("lector_channel_price"));
+			lc.setChannelOriginalVideo(rs.getString("original_lector_channel_video"));
+			lc.setChannelRenamedVideo(rs.getString("renamed_lector_channel_video"));
+			lc.setChannelEnrollDate(rs.getDate("lector_channel_date"));
+			lc.setChannelLevel(rs.getInt("lector_channel_level"));
+			lc.setChannel_assign(rs.getString("lector_channel_assign"));
+		}	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return lc;
+		
+	}
+	
+	//lectorNo를 가지고 엄마강좌에 대한 자식들만 출력할것임
+	public int channelCount(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("channelCount2");
+		try {
+			LectorChannel lc=new LectorChannel();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
 	}
 
 

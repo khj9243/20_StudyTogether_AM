@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.lector.model.service.LectorService;
 import com.kh.lector.model.vo.Lector;
+import com.kh.lector.model.vo.LectorChannel;
 
 /**
  * Servlet implementation class LectorOpenServlet
@@ -82,7 +83,6 @@ public class LectorListServlet extends HttpServlet {
 			}else {
 				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/lectorList?cPage="+(pageNo)+"'>다음</a>";
 			}
-		
 		request.setAttribute("totalLector", totalLector);
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
