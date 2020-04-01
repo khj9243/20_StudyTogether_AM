@@ -348,10 +348,11 @@ public class LectorDao {
 		return list;
 		
 	}
+	//lector_channel(자식)의 no만을 이용하여 자식강좌 출력하게 하는 메서드
 	public LectorChannel selectLectorChannel(Connection conn, int cNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=prop.getProperty("searchLectorChannel2");
+		String sql=prop.getProperty("searchLectorChannel");
 		LectorChannel lc=null;
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -378,6 +379,8 @@ public class LectorDao {
 		}
 		return lc;
 	}
+	
+	//엄마의 pNo와 자식이cNo를 이용하여 특정 자식강좌만 출력하게 하는 메서드
 	public LectorChannel searchChannel(Connection conn, int pNo, int cNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -408,6 +411,25 @@ public class LectorDao {
 			close(pstmt);
 		}
 		return lc;
+		
+	}
+	
+	//lectorNo를 가지고 엄마강좌에 대한 자식들만 출력할것임
+	public int channelCount(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("channelCount2");
+		try {
+			LectorChannel lc=new LectorChannel();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 		
 	}
 

@@ -28,24 +28,17 @@ public class ChannelViewServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+//자식강좌 출력!!!
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int pNo=Integer.parseInt(request.getParameter("pNo"));
-		
 		int cNo=Integer.parseInt(request.getParameter("cNo"));
-		/*
-		 * System.out.println("pNo:"+pNo); System.out.println("cNo:"+cNo);
-		 */
 		
 		Lector l=new LectorService().selectLector(pNo);
 		//LectorChannel lc1=new LectorService().selectChannel(cNo);
 		//페이징처리시작
-		
-		
-		int cPage;//엄마페이지
+			
+		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
@@ -53,7 +46,7 @@ public class ChannelViewServlet extends HttpServlet {
 		}
 		int numPerPage=5;
 		
-		///pNo,cNo가지고 lectorChannel을 출력해주는 메서드
+		///pNo=lectoNo,cNo=channelNo가지고 lectorChannelList을 출력해주는 메서드(페이징처리에 사용)
 		List<LectorChannel> clist=new LectorService().searchChannel(pNo,cNo,cPage,numPerPage);
 		
 		//채널의 특정강좌 1개 출력메서드
@@ -63,8 +56,8 @@ public class ChannelViewServlet extends HttpServlet {
 		
 		
 		//pageBar만들기
-		int totalChannel=new LectorService().channelCount();//1
-		int totalPage=(int)Math.ceil((double)totalChannel/numPerPage);//2
+		int RefTotalChannel=new LectorService().channelCount(pNo);//pNo,cNo를 가지고 리스트 
+		int totalPage=(int)Math.ceil((double)RefTotalChannel/numPerPage);//2
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
@@ -106,10 +99,10 @@ public class ChannelViewServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			
 		}else {
-			request.setAttribute("lc1", lc1);
-			request.setAttribute("clist", clist);
-			request.setAttribute("lector", l);
-			request.setAttribute("totalChannel", totalChannel);
+			request.setAttribute("lc1", lc1);//channel
+			request.setAttribute("clist", clist);//channelList
+			request.setAttribute("lector", l);//lector
+			request.setAttribute("RefTotalChannel", RefTotalChannel);//
 			request.setAttribute("pageBar", pageBar);
 			request.setAttribute("cPage", cPage);
 			request.getRequestDispatcher("/views/lector/channelView.jsp").forward(request, response);

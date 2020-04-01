@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 	
 <%@page import="com.kh.lector.model.vo.Lector,java.util.List,com.kh.lector.model.vo.LectorChannel" %>
-
+///자식강좌 View!
 <%
 	List<LectorChannel> clist=(List)request.getAttribute("clist");
 	int cPage=(int)request.getAttribute("cPage");
-	Lector l=(Lector)request.getAttribute("lector");
+	 Lector l=(Lector)request.getAttribute("lector");
 	LectorChannel lc=(LectorChannel)request.getAttribute("lc1");
 %>
 
@@ -16,10 +16,9 @@
 
 <section>
 <div class="container" >
-    <%-- <a href="<%=request.getContextPath() %>/lectorWatch/lectorInsert" class="btn btn-info" role="button">강좌 추가</a> --%>
-    <a href="<%=request.getContextPath()%>/lector/lectorChannelOpen?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 추가</a>
-    <a href="<%=request.getContextPath()%>/lector/lectorUpdate?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 수정</a>
-    <a href="<%=request.getContextPath() %>/lector/lectorDelete?no=<%=l.getLectorNo() %>" class="btn btn-info" role="button">강좌 삭제</a><!--관리자만 삭제  -->
+    <a href="<%=request.getContextPath()%>/lector/ChannelOpen?pno=<%=l.getLectorNo() %>&cno=<%=lc.getChannelNo() %>" class="btn btn-info" role="button">자식강좌 추가</a>
+    <a href="<%=request.getContextPath()%>/lector/ChannelUpdate?pno=<%=l.getLectorNo() %>&cno=<%=lc.getChannelNo() %>" class="btn btn-info" role="button">자식강좌 수정</a>
+    <a href="<%=request.getContextPath() %>/lector/ChannelDelete?pno=<%=l.getLectorNo() %>&cno=<%=lc.getChannelNo() %>" class="btn btn-info" role="button">자식강좌 삭제</a><!--관리자만 삭제  -->
 </div>
 
 <!--분기처리해서 강좌개설자&admin에게만 보일수 있는 강좌추가,수정,(삭제는 관리자페이지에서만가능) 버튼  -->
@@ -43,8 +42,6 @@
     </div>
    	 <button type="button" class="basket" onclick="apply();">수강신청</button>
  </div>
-
-
 	
 <p id="list">
 	<img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">
@@ -56,15 +53,15 @@
 	 <%for(LectorChannel lc2:clist){ %>
 	<div class="list-group">
     	<a href="<%=request.getContextPath() %>/lector/channelView?pNo=<%=l.getLectorNo() %>&cNo=<%=lc2.getChannelNo() %>" class="list-group-item list-group-item-action"><%=lc2.getChannelTitle() %></a>
-	
   	</div>
 </div>
-
+	<%}
+		}%>
+	
 	<ul class="pagination">
 		<%=request.getAttribute("pageBar") %>
-	</ul> 
-	<%}
-	}%>
+	</ul>
+	
 </section>
 
 <%@ include file="/views/common/footer.jsp"%>
