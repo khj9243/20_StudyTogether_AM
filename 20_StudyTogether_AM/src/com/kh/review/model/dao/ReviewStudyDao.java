@@ -121,5 +121,23 @@ public class ReviewStudyDao {
 		System.out.println("dao revS" + revS);
 		return revS;//null이거나 값이 있거나
 	}
+	public int updateReviewStudy(Connection conn, ReviewStudy revS) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		String sql=prop.getProperty("updateReviewStudy");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, revS.getReviewStuWriter());
+			pstmt.setString(2, revS.getStudyName());
+			pstmt.setString(3, revS.getReviewStuCategory());
+			pstmt.setString(4, revS.getReviewStuContent());
+			pstmt.setInt(5, revS.getReviewStuNo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;//null이거나 값이 있거나
+	}
 
 }
