@@ -3,27 +3,27 @@ package com.kh.lector.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.kh.lector.model.service.LectorService;
 import com.kh.lector.model.vo.Lector;
 import com.kh.lector.model.vo.LectorChannel;
 
 /**
- * Servlet implementation class LectorWatch
+ * Servlet implementation class ChannelViewServlet
  */
-@WebServlet("/lector/lectorView")
-public class LectorViewServlet extends HttpServlet {
+@WebServlet("/lector/channelView")
+public class ChannelViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LectorViewServlet() {
+    public ChannelViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +32,20 @@ public class LectorViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int no=Integer.parseInt(request.getParameter("pno"));
-		Lector l=new LectorService().selectLector(no);
-		LectorChannel lc=new LectorService().selectChannel(no);
 		
-		//int cNo=Integer.parseInt(request.getParameter("cNo"));
-		//List<LectorChannel> list=new LectorService().searchLector(cPage,numPerPage);
-
+		int pNo=Integer.parseInt(request.getParameter("pNo"));
 		
+		int cNo=Integer.parseInt(request.getParameter("cNo"));
+		/*
+		 * System.out.println("pNo:"+pNo); System.out.println("cNo:"+cNo);
+		 */
 		
+		Lector l=new LectorService().selectLector(pNo);
+		//LectorChannel lc1=new LectorService().selectChannel(cNo);
 		//페이징처리시작
-		/*	1.	cPage : 현재 페이지를 의미(1페이지를 보고있는지 2페이지를 보고있는지)
-		2.	numPerPage : 한 개 페이지에 출력될 데이터 수
-		3.	totalData : 총 데이터수(총 로우수)
-		4.	totalPage : 총 페이지 수 (페이지는 하나의 구역이라고 보면됨)
-		5.	pageBarSize : 화면에 출력할 페이지 번호 개수 
-		6.	pageNo : 출력할 페이지의 시작번호*/
-		int cPage;
+		
+		
+		int cPage;//엄마페이지
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
@@ -57,67 +53,66 @@ public class LectorViewServlet extends HttpServlet {
 		}
 		int numPerPage=5;
 		
-		///lectorView에서 채널  리스트로불러오는 메서드
-		List<LectorChannel> clist=new LectorService().searchChannel(no,cPage,numPerPage);
-//list로 불러와서 페이징처리하는법???????????????		
+		///pNo,cNo가지고 lectorChannel을 출력해주는 메서드
+		List<LectorChannel> clist=new LectorService().searchChannel(pNo,cNo,cPage,numPerPage);
+		
+		//채널의 특정강좌 1개 출력메서드
+		LectorChannel lc1=new LectorService().selectChannel(pNo,cNo);
+
+		
 		
 		
 		//pageBar만들기
 		int totalChannel=new LectorService().channelCount();//1
 		int totalPage=(int)Math.ceil((double)totalChannel/numPerPage);//2
-		
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
 		String pageBar="";
-		
-		//페이징처리시 필요한것 pNo,cNo,cPage
-		//페이지바가 표시되어야할시점:clist가 5이상일때,엄마채널의 관련된 영상에 대한것만 페이지바가 구성이되어야함
 
+		/*	1.	cPage : 현재 페이지를 의미(1페이지를 보고있는지 2페이지를 보고있는지)
+			2.	numPerPage : 한 개 페이지에 출력될 데이터 수
+			3.	totalData : 총 데이터수(총 로우수)
+			4.	totalPage : 총 페이지 수 (페이지는 하나의 구역이라고 보면됨)
+			5.	pageBarSize : 화면에 출력할 페이지 번호 개수 
+			6.	pageNo : 출력할 페이지의 시작번호*/
+		
 		if(pageNo==1) {
 			pageBar+="<li class='page-item'><a class='page-link'>이전</a></li>";
 			
-		}else if(pageNo>1){
-			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+(pageNo-1)+"&pNo="+no+"'>이전</a>";
-
 		}else {
-			pageBar="";
+			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+(pageNo-1)+"&pNo="+pNo+"&cNo="+cNo+"'>이전</a>";
 		}
-		
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
-			//시작페이지번호가 끝페이지번호보다 크지않거나 시작페이지번호가 전체페이지보다 크지않으면
-			if(pageNo==cPage) {
+			if(pageNo==cPage&&pNo==lc1.getChannelNoRef()&&cNo==lc1.getChannelNo()) {
 				pageBar+="<li class='page-item'><a class='page-link'  style='background-color: lightblue; color:black; '>"+pageNo+"</a></li>";
 			}else {
-				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+pageNo+"&pNo="+no+"'>"+pageNo+"</a>";
+				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+pageNo+"&pNo="+pNo+"&cNo="+cNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
-		
-		if(pageNo>totalPage&&pageNo==1) {
-		
+		if(pageNo>totalPage) {
 				pageBar+="<li class='page-item'><a class='page-link'>다음</a></li>";
-			}else if(clist.size()>5) {
-				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+(pageNo)+"&pNo="+no+"'>다음</a>";
 			}else {
-				pageBar="";
+				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+(pageNo)+"&pNo="+pNo+"&cNo="+cNo+"'>다음</a>";
 			}
-		
 		String msg="";
 		String loc="";
 		
-		if(l==null) {
+		if(clist==null) {
 			request.setAttribute("msg", "조회할 강좌가 없습니다.");
 			request.setAttribute("loc", "lector/lectorList");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			
 		}else {
+			request.setAttribute("lc1", lc1);
 			request.setAttribute("clist", clist);
 			request.setAttribute("lector", l);
 			request.setAttribute("totalChannel", totalChannel);
 			request.setAttribute("pageBar", pageBar);
 			request.setAttribute("cPage", cPage);
-			request.getRequestDispatcher("/views/lector/lectorView.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/lector/channelView.jsp").forward(request, response);
 		}
 	}
 	/**
