@@ -121,6 +121,13 @@ public class LectorService {
 		close(conn);
 		return lc;
 	}
+
+	public int channelCount(int no) {
+		Connection conn=getConnection();
+		int result=dao.channelCount(conn,no);
+		close(conn);
+		return result;
+	}
 	
 
 	

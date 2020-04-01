@@ -27,22 +27,17 @@ public class LectorViewServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int no=Integer.parseInt(request.getParameter("pno"));
-		Lector l=new LectorService().selectLector(no);
-		LectorChannel lc=new LectorService().selectChannel(no);
 		
-		//int cNo=Integer.parseInt(request.getParameter("cNo"));
-		//List<LectorChannel> list=new LectorService().searchLector(cPage,numPerPage);
-
+		///////////////LectorChannel lc=new LectorService().selectChannel(no);
+		//lectorChannelRefNo를 이용하여 엄마강좌의 자기자식만 출력할것임
 		
-		
-		//페이징처리시작
+		//channel페이징처리시작
 		/*	1.	cPage : 현재 페이지를 의미(1페이지를 보고있는지 2페이지를 보고있는지)
 		2.	numPerPage : 한 개 페이지에 출력될 데이터 수
 		3.	totalData : 총 데이터수(총 로우수)
@@ -55,16 +50,17 @@ public class LectorViewServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerPage=5;
+		int numPerPage=10;
 		
-		///lectorView에서 채널  리스트로불러오는 메서드
+		Lector l=new LectorService().selectLector(no);
+		//lectorno를 이용하여 특정lector출력
+		///lectorView에서 채널  리스트로불러오는 메서드->페이징처리위해
 		List<LectorChannel> clist=new LectorService().searchChannel(no,cPage,numPerPage);
-//list로 불러와서 페이징처리하는법???????????????		
-		
+		//channelRefNo를 이용하여 (엄마강좌번호)로 자식들 list로 출력 
 		
 		//pageBar만들기
-		int totalChannel=new LectorService().channelCount();//1
-		int totalPage=(int)Math.ceil((double)totalChannel/numPerPage);//2
+		int RefTotalChannel=new LectorService().channelCount(no);//엄마강좌의 pNo를 가지고 그에대한 자식들의 총갯수
+		int totalPage=(int)Math.ceil((double)RefTotalChannel/numPerPage);//2
 		
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -78,11 +74,9 @@ public class LectorViewServlet extends HttpServlet {
 		if(pageNo==1) {
 			pageBar+="<li class='page-item'><a class='page-link'>이전</a></li>";
 			
-		}else if(pageNo>1){
+		}else{
 			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+(pageNo-1)+"&pNo="+no+"'>이전</a>";
 
-		}else {
-			pageBar="";
 		}
 		
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
@@ -94,14 +88,11 @@ public class LectorViewServlet extends HttpServlet {
 			}
 			pageNo++;
 		}
-		
 		if(pageNo>totalPage&&pageNo==1) {
 		
 				pageBar+="<li class='page-item'><a class='page-link'>다음</a></li>";
-			}else if(clist.size()>5) {
-				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+(pageNo)+"&pNo="+no+"'>다음</a>";
-			}else {
-				pageBar="";
+			}else  {
+				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+pageNo+"&pNo="+no+"'>다음</a>";
 			}
 		
 		String msg="";
@@ -114,7 +105,7 @@ public class LectorViewServlet extends HttpServlet {
 		}else {
 			request.setAttribute("clist", clist);
 			request.setAttribute("lector", l);
-			request.setAttribute("totalChannel", totalChannel);
+			request.setAttribute("RefTotalChannel", RefTotalChannel);//엄마강좌의 자식들갯수
 			request.setAttribute("pageBar", pageBar);
 			request.setAttribute("cPage", cPage);
 			request.getRequestDispatcher("/views/lector/lectorView.jsp").forward(request, response);

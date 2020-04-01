@@ -2,13 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@page import="java.util.List,com.kh.lector.model.vo.Lector,com.kh.lector.model.vo.LectorChannel,java.util.List" %>
-
+//엄마강좌View!!
 <%
 	Lector l=(Lector)request.getAttribute("lector");
 	List<LectorChannel> clist=(List)request.getAttribute("clist");
  	int cPage=(int)request.getAttribute("cPage");
-
-	
 %>
 
 <%@ include file="/views/common/header.jsp"%>
@@ -25,7 +23,6 @@
 .btn btn-info{
 background-color:#ffc107;
 }
-
 </style>
 
 <!--분기처리해서 강좌개설자&admin에게만 보일수 있는 강좌추가,수정,(삭제는 관리자페이지에서만가능) 버튼  -->
@@ -42,7 +39,6 @@ background-color:#ffc107;
 	<video src="<%=request.getContextPath() %>/upload/lector/<%=l.getLectorOriginalVideo() %>" id="video" controls width="855px" height="481px"></video>
     <%}%>
  	</div>
-    
     <div id="video-inform">
     <%=l.getLectorDetail() %>
     </div>
@@ -62,11 +58,9 @@ background-color:#ffc107;
   </div>
 </div>
 
-
  	<ul class="pagination">
 		<%=request.getAttribute("pageBar") %>
 	</ul> 
-
  
 <style>
 	.pagination{
@@ -76,8 +70,6 @@ background-color:#ffc107;
 	}
 
 </style>
-
-
 
 <%-- </div>
  <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
