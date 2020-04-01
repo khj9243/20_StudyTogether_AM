@@ -79,7 +79,6 @@ public class LectorChannel {
 		this.channelWriter = channelWriter;
 	}
 
-
 	public String getChannelDetail() {
 		return channelDetail;
 	}

@@ -3,20 +3,21 @@
      .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
     width: 1400px;
-    height:400px;
+    height:300px;
     z-index: 1;
   }  
  
-  /* .carousel-inner > .item > img{
+/* .carousel-inner > .item > img{
     width:1200px;
     height:450px;
-  } */
-  #myCarousel{
+  }  
+ */
+   #myCarousel{
     margin-left:0px;
     margin-top:0px;
     /* margin-bottom: 0px; */
-    height: 350px;
-    width:1350px;
+    height: 420px;
+    width:100%;
   }
   .carousel-inner{
     margin-bottom: 0px;

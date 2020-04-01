@@ -87,9 +87,9 @@ public class LectorService {
 		return list;
 	}
 
-	public List<LectorChannel> searchChannel(int no, int cPage, int numPerPage) {
+	public List<LectorChannel> searchChannel(int pNo, int cPage, int numPerPage) {
 		Connection conn=getConnection();
-		List<LectorChannel> list=dao.searchChannel(conn,no,cPage,numPerPage);
+		List<LectorChannel> list=dao.searchChannel(conn,pNo,cPage,numPerPage);
 		close(conn);
 		return list;
 	}
@@ -97,6 +97,34 @@ public class LectorService {
 	public int channelCount() {
 		Connection conn=getConnection();
 		int result=dao.channelCount(conn);
+		close(conn);
+		return result;
+	}
+//channelView 넘어가는시작
+	public List<LectorChannel> searchChannel(int pNo, int cNo, int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List<LectorChannel> list=dao.searchChannel(conn,pNo,cNo,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+//channel no를 받아와 조회 특정 channel조회
+	public LectorChannel selectChannel(int cNo) {
+		Connection conn=getConnection();
+		LectorChannel lc=dao.selectLectorChannel(conn,cNo);
+		close(conn);
+		return lc;
+	}
+//channel pNo,cNo 유저채널의 1개 강좌 조회
+	public LectorChannel selectChannel(int pNo, int cNo) {
+		Connection conn=getConnection();
+		LectorChannel lc=dao.searchChannel(conn,pNo,cNo);
+		close(conn);
+		return lc;
+	}
+
+	public int channelCount(int no) {
+		Connection conn=getConnection();
+		int result=dao.channelCount(conn,no);
 		close(conn);
 		return result;
 	}

@@ -2,13 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@page import="java.util.List,com.kh.lector.model.vo.Lector,com.kh.lector.model.vo.LectorChannel,java.util.List" %>
-
+//엄마강좌View!!
 <%
 	Lector l=(Lector)request.getAttribute("lector");
 	List<LectorChannel> clist=(List)request.getAttribute("clist");
  	int cPage=(int)request.getAttribute("cPage");
-
-	
 %>
 
 <%@ include file="/views/common/header.jsp"%>
@@ -25,7 +23,6 @@
 .btn btn-info{
 background-color:#ffc107;
 }
-
 </style>
 
 <!--분기처리해서 강좌개설자&admin에게만 보일수 있는 강좌추가,수정,(삭제는 관리자페이지에서만가능) 버튼  -->
@@ -45,41 +42,34 @@ background-color:#ffc107;
     <div id="video-inform">
     <%=l.getLectorDetail() %>
     </div>
+   
     <button type="button" class="basket" onclick="apply();">수강신청</button>
   </div>
-
-
+  
+  
 <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
-
-
 <div class="container">
 <%if(!clist.isEmpty()){ %>
   <div class="list-group">
     <%for(LectorChannel lc:clist){ %>
-    <a href="#" class="list-group-item list-group-item-action"><%=lc.getChannelTitle() %></a>
-	<%}
+    <a href="<%=request.getContextPath() %>/lector/channelView?pNo=<%=l.getLectorNo() %>&cNo=<%=lc.getChannelNo() %>" class="list-group-item list-group-item-action"><%=lc.getChannelTitle() %></a>
+  <%}
 	}%>
   </div>
 </div>
 
- <ul class="pagination">
+ 	<ul class="pagination">
 		<%=request.getAttribute("pageBar") %>
 	</ul> 
+ 
 <style>
 	.pagination{
-		margin-left:550px;
+		margin-left:600px;
 		margin-top:100px;
 		margin-bottom:100px;	
 	}
 
 </style>
-
-<!-- <div class="page">
-<ul class="pagination">
-  <li class="page-item"><a class="page-link" href="#">이전</a></li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item"><a class="page-link" href="#">다음</a></li>
-</ul> -->
 
 <%-- </div>
  <p id="list"><img src="<%=request.getContextPath() %>/images/list.svg" width="30px" height="auto">&nbsp;&nbsp;강의목록</p>
@@ -94,14 +84,6 @@ background-color:#ffc107;
   </div> 
 </div> --%>
 
-
-<!-- <div class="page">
-<ul class="pagination">
-  <li class="page-item"><a class="page-link" href="#">이전</a></li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item"><a class="page-link" href="#">다음</a></li>
-</ul>
-</div> -->
 </section>
 
  <script>
@@ -138,7 +120,7 @@ var result= confirm("장바구니에 강좌를 담았습니다. 장바구니로 
    location.reload;
  }
 }
-
+ 
 </script>
 
 <%@ include file="/views/common/footer.jsp"%>

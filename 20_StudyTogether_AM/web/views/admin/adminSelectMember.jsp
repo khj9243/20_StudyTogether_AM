@@ -31,10 +31,25 @@
             	<td><%=m.getUserId() %></td>
             	<td><%=m.getUserName() %></td>
             	<td><%=m.getEmail() %></td>
-            	<td><%=m.getNickName() %></td>
-            	<td><%=m.getGender() %></td>
-            	<td><%=m.getPhone() %></td>
-            	<td><%=m.getEnrollDate() %></td>
+            	<td><%=m.getNickName()!=null?m.getNickName():"미입력" %></td>
+            	<%-- <td><%=m.getGender()!=null?(m.getGender().equals("M")?"남":m.getGender().equals("F")?"여":""):"" %></td> --%>
+            	<td>
+            		<%
+	            		switch(m.getGender()!=null?m.getGender():"기본"){
+	            			case "M" : %>
+	            			<span>남</span> 
+	            		<% break;
+	            			case "F" : %>
+	            			<span>여</span> 
+	            		<% break;
+	            			case "기본" : %>
+	            			<span>미입력</span> 
+	            		<% break;
+	            		} 
+            		%>
+            	</td>
+            	<td><%=m.getPhone()!=null?m.getPhone():"미입력" %></td>
+            	<td><%=m.getEnrollDate()!=null?m.getEnrollDate():"미입력" %></td>
             </tr>
             <%}
             }%>
