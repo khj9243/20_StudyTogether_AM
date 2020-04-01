@@ -12,8 +12,8 @@
                     <th>강좌명</th>
                     <th>이미지</th>
                     <th>가격</th>
-                    <th>승인 여부</th>
-                    <th>전송</th>
+                    <th colspan="2">승인 여부</th>
+                    <!-- <th>전송</th> -->
                   </tr>
                 </thead>
                 <tbody class="text-center">

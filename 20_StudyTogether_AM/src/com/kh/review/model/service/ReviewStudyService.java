@@ -46,4 +46,13 @@ public class ReviewStudyService {
 		return revS;
 	}
 
+	public int updateReviewStudy(ReviewStudy revS) {
+		Connection conn = getConnection();
+		int flag = dao.updateReviewStudy(conn,revS);
+		if(flag>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return flag;
+	}
+
 }

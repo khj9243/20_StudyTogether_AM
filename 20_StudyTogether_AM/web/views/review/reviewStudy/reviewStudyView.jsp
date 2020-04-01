@@ -82,28 +82,25 @@ table.revWrite td {
         </tr>
           
    </table>
-   <br>
- 		<%if(loginMember!=null && (loginMember.getUserId().equals("admin") || loginMember.getUserId().equals(revS.getReviewStuWriter()))){ %>
+   <br>			
+</form>
+<%if(loginMember!=null && (loginMember.getUserId().equals("admin") || loginMember.getUserId().equals(revS.getReviewStuWriter()))){ %>
 	        
 	        <div style="mrgin:0 auto;">
-	     		  <button type="button" onclick="backBtn();" id="backBtn">목록으로</button>
-	     		 
-	              <button onclick="updateChk();" name="revUpdate" id="revUpdate">수정</button>
-       			  <button onclick="deleteChl();" name="revDelete" id="revDelete">삭제</button>
+	     		   <button type="button" onclick="location.replace('<%=request.getContextPath()%>/review/reviewStudy/reviewStudyList')" id="backBtn">목록으로</button>
+	     		 	<!--  <a href="<%=request.getContextPath()%>/review/reviewStudy/reviewStudyList">목록</a>-->
+	              <button onclick="updateChk()" name="revUpdate" id="revUpdate">수정</button>
+       			  <button onclick="deleteChl()" name="revDelete" id="revDelete">삭제</button>
 	        </div>
 	     <%}else{ %>
 			<div>
-				 <button type="button" onclick="backBtn();" name="no" id="backBtn">목록으로</button>
+				<button type="button" onclick="location.replace('<%=request.getContextPath()%>/review/reviewStudy/reviewStudyList')" id="backBtn">목록으로</button>
 			</div>
-		<%} %>
 			
-</form>
+		<%} %>
 <script>
-	function backBtn(){
-		location.replace("<%=request.getContextPath()%>/review/reviewStudy/reviewStudyList");
-	}
 	function updateChk(){
-		location.replace("<%=request.getContextPath()%>/review/reviewStudyUpdate?no=<%=revS.getReviewStuNo()%>");
+		location.replace("<%=request.getContextPath()%>/review/reviewStudyUpdate?no=<%=revS.getReviewStuNo()%>")
 	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>

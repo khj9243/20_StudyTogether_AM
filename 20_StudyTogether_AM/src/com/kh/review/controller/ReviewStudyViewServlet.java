@@ -33,7 +33,7 @@ public class ReviewStudyViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		ReviewStudy revS = new ReviewStudyService().searchReviewStudy(no);;
+		ReviewStudy revS = new ReviewStudyService().searchReviewStudy(no);
 		if(revS==null) {
 			//msg.jsp페이지로 전환
 			request.setAttribute("msg", "등록된 후기가 없습니다");
