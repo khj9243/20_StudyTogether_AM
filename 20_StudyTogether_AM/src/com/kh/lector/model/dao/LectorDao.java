@@ -392,6 +392,7 @@ public class LectorDao {
 			pstmt.setInt(2, cNo);
 			rs=pstmt.executeQuery();
 		if(rs.next())	{
+			lc=new LectorChannel();
 			lc.setChannelNo(rs.getInt("lector_channel_no"));
 			lc.setChannelNoRef(rs.getInt("lector_channel_no_ref"));
 			lc.setChannelTitle(rs.getString("lector_channel_title"));

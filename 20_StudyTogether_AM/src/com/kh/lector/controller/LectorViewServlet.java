@@ -27,7 +27,6 @@ public class LectorViewServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -51,7 +50,7 @@ public class LectorViewServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerPage=5;
+		int numPerPage=10;
 		
 		Lector l=new LectorService().selectLector(no);
 		//lectorno를 이용하여 특정lector출력
@@ -75,7 +74,7 @@ public class LectorViewServlet extends HttpServlet {
 		if(pageNo==1) {
 			pageBar+="<li class='page-item'><a class='page-link'>이전</a></li>";
 			
-		}else if(pageNo>1){
+		}else{
 			pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+(pageNo-1)+"&pNo="+no+"'>이전</a>";
 
 		}
@@ -89,11 +88,10 @@ public class LectorViewServlet extends HttpServlet {
 			}
 			pageNo++;
 		}
-		
 		if(pageNo>totalPage&&pageNo==1) {
 		
 				pageBar+="<li class='page-item'><a class='page-link'>다음</a></li>";
-			}else if(clist.size()>5) {
+			}else  {
 				pageBar+="<a class='page-link' href='"+request.getContextPath()+"/lector/channelView?cPage="+pageNo+"&pNo="+no+"'>다음</a>";
 			}
 		

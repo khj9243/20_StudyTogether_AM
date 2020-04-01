@@ -28,11 +28,11 @@ public class ChannelViewServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-//자식강좌 출력!!!
+//자식강좌 단일출력 및 목록구성하는 서블릿
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int pNo=Integer.parseInt(request.getParameter("pNo"));
-		int cNo=Integer.parseInt(request.getParameter("cNo"));
+		int pNo=Integer.parseInt(request.getParameter("pNo"));//엄마번호
+		int cNo=Integer.parseInt(request.getParameter("cNo"));//자식번호
 		
 		Lector l=new LectorService().selectLector(pNo);
 		//LectorChannel lc1=new LectorService().selectChannel(cNo);
@@ -46,17 +46,17 @@ public class ChannelViewServlet extends HttpServlet {
 		}
 		int numPerPage=5;
 		
-		///pNo=lectoNo,cNo=channelNo가지고 lectorChannelList을 출력해주는 메서드(페이징처리에 사용)
+		///목록구성 : pNo=lectoNo,cNo=channelNo가지고 lectorChannelList을 출력해주는 메서드(페이징처리에 사용)
 		List<LectorChannel> clist=new LectorService().searchChannel(pNo,cNo,cPage,numPerPage);
 		
-		//채널의 특정강좌 1개 출력메서드
+		//단일 채널:채널의 특정강좌 1개 출력메서드
 		LectorChannel lc1=new LectorService().selectChannel(pNo,cNo);
 
 		
 		
 		
 		//pageBar만들기
-		int RefTotalChannel=new LectorService().channelCount(pNo);//pNo,cNo를 가지고 리스트 
+		int RefTotalChannel=new LectorService().channelCount(pNo);
 		int totalPage=(int)Math.ceil((double)RefTotalChannel/numPerPage);//2
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
